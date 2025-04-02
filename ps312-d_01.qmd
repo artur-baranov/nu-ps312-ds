@@ -10,4 +10,19 @@ toc: true
 
 # Before we start
 
--   Download the script
+-   Download and open the script
+
+-   Follow the script throughout the discussion section
+
+-   
+
+![](http://qrcoder.ru/code/?https%3A%2F%2Fartur-baranov.github.io%2Fnu-ps312-ds%2Fps312-d_01.html&4&0)
+
+```{r}
+#| warning: false
+
+library(qrcode)
+qr_code('https://artur-baranov.github.io/nu-ps312-ds/ps312-d_01.html') |>
+  plot()
+```
+

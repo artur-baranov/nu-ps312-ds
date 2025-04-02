@@ -30,8 +30,8 @@
   {
     "objectID": "ps312-d_01.html",
     "href": "ps312-d_01.html",
-    "title": "Last Quarter’s Review",
+    "title": "Introduction to Statistical Methods",
     "section": "",
-    "text": "Before we start\n\nDownload the script"
+    "text": "Before we start\n\nDownload and open the script\nFollow the script throughout the discussion section\n\n\n\n\nlibrary(qrcode)\n\nWarning: package 'qrcode' was built under R version 4.4.3\n\nqr_code('https://artur-baranov.github.io/nu-ps312-ds/ps312-d_01.html') |&gt;\n  plot()"
   }
 ]
