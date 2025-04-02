@@ -1,0 +1,6 @@
+- title: "Introduction to Statistical Methods"
+  Week: 1
+  date: 2025-04-03
+  Link: "[{{< fa link >}}](/ps312-d_01.qmd)"
+  Code: "[{{< fa file-code >}}](scripts/ps312-d_01.qmd){target='_blank'}"
+  type: "schedule"

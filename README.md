@@ -1,1 +1,2 @@
-# nu-ps312-ds
+# PS312: Statistical Research Methods
+

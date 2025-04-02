@@ -1,0 +1,13 @@
+---
+title: "Introduction to Statistical Methods"
+subtitle: "Week 1"
+date: 2025-04-03
+format: 
+  html:
+    embed-resources: true
+toc: true
+---
+
+# Before we start
+
+-   Download the script

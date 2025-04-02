@@ -1,0 +1,26 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+    - "!/docs/scripts/*.qmd"
+    - "!drafts.qmd"
+
+website:
+  title: "PS312: Statistical Research Methods"
+  favicon: fav.png
+  navbar:
+    left:
+      - text: " "
+        href: index.qmd
+
+format:
+  html:
+    theme:
+      light: [flatly, custom.scss]
+    mainfont: roboto
+    css: styles.css
+    toc: true
+
+
+

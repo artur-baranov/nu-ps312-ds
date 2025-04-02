@@ -1,0 +1,45 @@
+---
+format: 
+  html:
+    toc: false
+listing:
+  - id: schedule
+    include: 
+      type: "schedule"
+    contents: classes.yaml
+    type: table
+    fields: [Week, title, Link, Code, Data]
+    filter-ui: false
+    sort: "week"
+    sort-ui: false
+---
+
+## Description
+<center>PS 312 • Spring 2025<p style="color:#4E2A84;">Northwestern University</p></center>
+
+This site is designed to support students enrolled in the PS312 Statistical Research Methods course. In the section, we will focus on coding and practicing the concepts covered in the lectures.
+
+:::: {.columns}
+
+::: {.column}
+### Section Details
+
+- {{< fa calendar >}} &nbsp; Thursday
+- {{< fa location-dot >}} &nbsp; University Hall 412
+
+:::
+
+::: {.column}
+### Office Hours Details
+
+- {{< fa calendar >}} &nbsp; Monday
+- {{< fa clock >}} &nbsp; 11:00 AM -- 12:30 PM
+- {{< fa location-dot >}} &nbsp; Scott Hall 110
+:::
+
+::::
+
+## Schedule
+
+:::{#schedule}
+:::
