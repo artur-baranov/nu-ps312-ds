@@ -13,6 +13,9 @@ website:
     left:
       - text: " "
         href: index.qmd
+    right:
+      - icon: cloud-fill
+        href: https://posit.cloud/
 
 format:
   html:
