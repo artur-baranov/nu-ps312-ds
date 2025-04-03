@@ -29,6 +29,8 @@ First of all, introduction time!
 
 -   Your interest in the political science
 
+-   Your previous experience with R
+
 ## Agenda
 
 -   Getting used to work in RStudio

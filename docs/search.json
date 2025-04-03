@@ -32,7 +32,7 @@
     "href": "ps312-d_01.html",
     "title": "Introduction to Statistical Methods",
     "section": "",
-    "text": "artur-baranov.github.io/nu-ps312-ds\n\n\nlibrary(qrcode)\nqr_code('https://artur-baranov.github.io/nu-ps312-ds') |&gt;\n  plot()\n\n\n\n\n\n\n\n\n\n\nFirst of all, introduction time!\n\nYour name\nYour interest in the political science\n\n\n\n\n\nGetting used to work in RStudio\nLoading data into R\nPracticing asking statistical questions"
+    "text": "artur-baranov.github.io/nu-ps312-ds\n\n\nlibrary(qrcode)\nqr_code('https://artur-baranov.github.io/nu-ps312-ds') |&gt;\n  plot()\n\n\n\n\n\n\n\n\n\n\nFirst of all, introduction time!\n\nYour name\nYour interest in the political science\nYour previous experience with R\n\n\n\n\n\nGetting used to work in RStudio\nLoading data into R\nPracticing asking statistical questions"
   },
   {
     "objectID": "ps312-d_00.html",
@@ -137,7 +137,7 @@
     "href": "ps312-d_01.html#getting-to-know-each-other",
     "title": "Introduction to Statistical Methods",
     "section": "",
-    "text": "First of all, introduction time!\n\nYour name\nYour interest in the political science"
+    "text": "First of all, introduction time!\n\nYour name\nYour interest in the political science\nYour previous experience with R"
   },
   {
     "objectID": "ps312-d_02.html",
