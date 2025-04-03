@@ -15,7 +15,7 @@ listing:
 ---
 
 ## Description
-<center>PS 312 • Spring 2025<p style="color:#4E2A84;">Northwestern University</p></center>
+<center>PS 312 • Spring 2025 <br> Department of Political Science<p style="color:#4E2A84;">Northwestern University</p></center>
 
 This site is designed to support students enrolled in the PS312 Statistical Research Methods course. In the section, we will focus on coding and practicing the concepts covered in the lectures.
 

@@ -51,7 +51,12 @@ First of all, introduction time!
 
 <br><center>
 <a href="https://artur-baranov.github.io/nu-ps312-ds/scripts/ps312-d_01.qmd" class="btn btn-primary" role="button" download="ps312-d_01.qmd" style="width:200px" target="_blank">Download script</a>
+</center>
+<br>
+<center>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/data/WHR.csv" class="btn btn-primary" role="button" download="WHR.csv" style="width:200px" target="_blank">Download data</a>
 </center><br>
+
 
 You can install R and RStudio, instructions are available [here](https://artur-baranov.github.io/nu-ps312-ds/ps312-d_00.html). Alternatively, feel free to use [Posit.Cloud](https://posit.cloud/)
 
