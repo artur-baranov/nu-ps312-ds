@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
     const options = {
       valueNames: ['listing-Week','listing-title','listing-Link','listing-Code','listing-Data',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-title-sort'] },{ data: ['listing-date-sort'] }],
       
-      searchColumns: ["listing-title","listing-Week","listing-date","listing-Link","listing-Code","listing-type"],
+      searchColumns: ["listing-title","listing-Week","listing-date","listing-Link","listing-Code","listing-Data","listing-type"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -196,6 +196,7 @@ Northwestern University
 <ul>
 <li><i class="fa-solid fa-calendar" aria-label="calendar"></i> &nbsp; Thursday</li>
 <li><i class="fa-solid fa-location-dot" aria-label="location-dot"></i> &nbsp; University Hall 412</li>
+<li><i class="fa-solid fa-at" aria-label="at"></i> &nbsp; artur.baranov@u.northwestern.edu</li>
 </ul>
 </section>
 </div><div class="column">
@@ -203,8 +204,8 @@ Northwestern University
 <h3 class="anchored" data-anchor-id="office-hours-details">Office Hours Details</h3>
 <ul>
 <li><i class="fa-solid fa-calendar" aria-label="calendar"></i> &nbsp; Monday</li>
-<li><i class="fa-solid fa-clock" aria-label="clock"></i> &nbsp; 11:00 AM – 12:30 PM</li>
 <li><i class="fa-solid fa-location-dot" aria-label="location-dot"></i> &nbsp; Scott Hall 110</li>
+<li><i class="fa-solid fa-clock" aria-label="clock"></i> &nbsp; 11:00 AM – 12:30 PM</li>
 </ul>
 </section>
 </div>
@@ -248,7 +249,7 @@ Data
 <span class="listing-Code"><a href="scripts/ps312-d_01.qmd" target="_blank"><i class="fa-solid fa-file-code" aria-label="file-code"></i></a></span>
 </td>
 <td>
-<span class="listing-Data">&nbsp;</span>
+<span class="listing-Data"><a href="data/WHR.csv" target="_blank"><i class="fa-solid fa-database" aria-label="database"></i></a></span>
 </td>
 </tr>
 </tbody>

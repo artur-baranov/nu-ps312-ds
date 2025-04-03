@@ -26,6 +26,7 @@ This site is designed to support students enrolled in the PS312 Statistical Rese
 
 - {{< fa calendar >}} &nbsp; Thursday
 - {{< fa location-dot >}} &nbsp; University Hall 412
+- {{< fa at >}} &nbsp; artur.baranov@u.northwestern.edu 
 
 :::
 
@@ -33,11 +34,12 @@ This site is designed to support students enrolled in the PS312 Statistical Rese
 ### Office Hours Details
 
 - {{< fa calendar >}} &nbsp; Monday
-- {{< fa clock >}} &nbsp; 11:00 AM -- 12:30 PM
 - {{< fa location-dot >}} &nbsp; Scott Hall 110
+- {{< fa clock >}} &nbsp; 11:00 AM -- 12:30 PM
 :::
 
 ::::
+
 
 ## Schedule
 
