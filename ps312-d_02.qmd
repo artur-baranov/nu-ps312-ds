@@ -48,7 +48,7 @@ Types of relationship:
 - Descriptive
 
 - Predictive
-вывыввввывыы
+
 - Causal
 
 #
