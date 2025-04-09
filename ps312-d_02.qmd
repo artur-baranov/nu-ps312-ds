@@ -91,6 +91,8 @@ cpds = read_excel("data/cpds.xlsx")
 Load the `tidyverse` library
 
 ```{r}
+#| message: false
+
 library(tidyverse)
 ```
 
@@ -177,6 +179,8 @@ ggplot(cpds_subset) +
   geom_histogram(...(x = ...)) +
   ...(xintercept = mean(cpds_subset$openc))
 ```
+
+
 
 
 :::
