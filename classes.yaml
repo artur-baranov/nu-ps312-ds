@@ -5,3 +5,12 @@
   Code: "[{{< fa file-code >}}](scripts/ps312-d_01.qmd){target='_blank'}"
   Data: "[{{< fa database >}}](data/WHR.csv){target='_blank'}"
   type: "schedule"
+  
+- title: "Exploring Data"
+  Week: 2
+  date: 2025-04-10
+  Link: "[{{< fa link >}}](/ps312-d_02.qmd)"
+  Code: "[{{< fa file-code >}}](scripts/ps312-d_02.qmd){target='_blank'}"
+  Data: "[{{< fa database >}}](data/cpds.csv){target='_blank'}"
+  type: "schedule"
+

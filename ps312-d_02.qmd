@@ -14,6 +14,14 @@ toc: true
 
 -   But! Script will be published on the website. Go through it! Data classes will be discussed there!
 
+<br><center>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/scripts/ps312-d_02.qmd" class="btn btn-primary" role="button" download="ps312-d_02.qmd" style="width:200px" target="_blank">Download script</a>
+</center>
+<br>
+<center>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/data/cpds.xlsx" class="btn btn-primary" role="button" download="cpds.xlsx" style="width:200px" target="_blank">Download data</a>
+</center><br>
+
 # Quick Recap
 
 ## Substantive
@@ -112,7 +120,7 @@ How does the data look like? Using `head()` let's present first rows to get the 
 head(cpds_subset)
 ```
 
-Explore the distribution of Gini below. What can we observe?
+Explore the distribution of Gini below. What can we observe? Pay attention to `aes()` argument. 
 
 ```{r}
 ggplot(cpds_subset) +
@@ -143,7 +151,7 @@ ggplot(cpds_subset) +
   geom_boxplot(aes(y = prefisc_gini, x = eu)) 
 ```
 
-Let's correct the class of variables. We'll discuss the classes more in a detail next week*. Fantastic! Are these groups different?
+Let's correct the class of variables. We'll discuss the classes more in a detail next week*. Fantastic! Are these groups different? Add `drop_na(eu)` to remove the NA category on the graph.
 
 ```{r}
 cpds_subset %>%
@@ -155,19 +163,21 @@ cpds_subset %>%
 ::: {.callout-tip icon="false"}
 ## Coding Task
 
+Imagine, you were asked the following question. Does a communist past lead to a more open economy?
+
 Let's explore these variables:
 
 -   `openc` - Openness of the economy (trade as % of GDP)
 
 -   `poco` -  post-communist countries post-communist countries identification
 
-They are already in `cpds_subset`. Draw a distribution of `openc` variable.
+They are already in `cpds_subset`. Draw a distribution of `openc` variable using `geom_histogram()`.
 
 ```{r}
 #| eval: false
 
 ggplot(...) +
-  geom_histogram(aes(x = ...)) 
+  ...(aes(x = openc)) 
 ```
 
 Add an average of `openc` to the plot using `geom_vline()`
@@ -180,29 +190,76 @@ ggplot(cpds_subset) +
   ...(xintercept = mean(cpds_subset$openc))
 ```
 
+Compare post-communist countries to non post-communist countries (`poco`) in terms of the openness of the economy (`openc`). Use `geom_boxplot()`, and don't forget to make sure the class of the variable is the right one!
 
+```{r}
+
+```
+
+Insert a chunk, add labels and cutsomize the plot. 
+
+...
+
+Did we address the question posed at the beginning? Did we approach it descriptively, predictively, or causally? Take a moment to think through that and write down your thoughts.
 
 
 :::
 
 
-
-
-Types of relationship:
-
-- Descriptive
-
-- Predictive
-
-- Causal
-
-
 # Exploring missing values
 
--   What are potential biases 
+Quite often there are missing values in the data. Let's, first of all, understand how big of the problem is. Why are there this many missing values? 
 
-# Sampling Biases
+```{r}
+is.na(cpds_subset$prefisc_gini) %>%
+  sum()
+```
+
+Let's create a variable indicating if the values are missing or not.
+
+```{r}
+cpds_subset = cpds_subset %>%
+  mutate(gini_na = is.na(prefisc_gini))
+```
+
+Now, let's graph the dynamics. Which years have more missing values, and which have fewer?
+
+```{r}
+missing_years = cpds_subset %>%
+  group_by(year, gini_na) %>%
+  count() 
+
+missing_years %>%
+  head()
+```
+
+
+Finally, let's plot it using `geom_col()` - which is quite similar to `geom_histogram()`. Take a moment to compare it. Substantivelly, it is clear that there are some problems with the data we have to account for: the older the data, the worse is the record of Gini Coefficient.
+
+```{r}
+missing_years %>%
+  ggplot() +
+  geom_col(aes(x = year, y = n, fill = gini_na), position = "dodge") +
+  labs(fill = "Missing",
+       x = "Year",
+       y = "Count")
+```
+
 
 # Some Tips
 
--   QoG and V-Dem were covered in the Lecture
+-   QoG and V-Dem were covered in the Lecture -- take some time to go through this data for your project
+
+-   Additionally, take a look on this [list of datasets](https://github.com/erikgahner/PolData)
+
+-   Sometimes we start with a question and then search for the data. However, sometimes it's the opposite: there's data available, and we ask, 'What can I use it for?'
+
+# Check List
+
+<input type="checkbox"/> I undertsand how I can load .csv and .xlsx in R, and if I see some other unsual file extension, it will not scare me
+
+<input type="checkbox"/> I know how to proceed with exploratory analysis: drawing graphs is fun and useful
+
+<input type="checkbox"/> I know that there might be missing values, and I will keep this in mind when exploring the relationships between variables
+
+<input type="checkbox"/> I know what a histogram and a boxplot is. I get how we can visually compare distributions
