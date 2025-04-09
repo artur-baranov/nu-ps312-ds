@@ -8,21 +8,39 @@ format:
 toc: true
 ---
 
+# Before we start
+
+-   No Thursday discussion section next week
+
+-   But! Script will be published on the website. Go through it! Data classes will be discussed there!
+
 # Quick Recap
+
+## Substantive
 
 -   What is a **Causal Relation**?
 
--   What is a **Confounder**?
+-   What is **Confounder**?
 
--   Independent Variable
+-   Independent Variable vs Dependent Variable?
 
--   Dependent Variable
+-   Control Variable?
 
--   Control Variable
+## Coding
+
+-   What is a Chunk?
+
+-   What is a CSV vs Excel?
 
 # Agenda
 
+-   Questions regarding Lab Assignment or the class?
+
+-   Continuing to adapt to R and RStudio
+
 -   Exploring Data
+
+-   Keeping track of Missingness
 
 
 # Markdown and Quarto
@@ -43,6 +61,129 @@ Generally, what we've done so far can be described by the image below. We have u
 
 
 
+# Finding Data
+
+Let’s explore Comparative Political Dataset. It consists of political and institutional country-level data. Take a look on their [codebook](https://cpds-data.org/wp-content/uploads/2024/11/codebook_cpds.pdf).
+
+Today we are working with the following variables.
+
+-   `year` - year variable
+
+-   `country` - country variable
+
+-   `prefisc_gini` - Gini index. What is it?
+
+-   `eu` - member states of the European Union identification
+
+-   `openc` - Openness of the economy (trade as % of GDP)
+
+-   `poco` -  post-communist countries post-communist countries identification
+
+
+If you don't have `readxl` library installed, do it using `install.packages()`. Run it only once!
+
+```{r}
+library(readxl)
+
+cpds = read_excel("data/cpds.xlsx")
+```
+
+Load the `tidyverse` library
+
+```{r}
+library(tidyverse)
+```
+
+
+# Exploring data
+
+First of all, let's subset the variables we have outlined for the ease of working with data.
+
+```{r}
+cpds_subset = cpds %>%
+  select(year, country, prefisc_gini, eu, openc, poco) 
+```
+
+How does the data look like? Using `head()` let's present first rows to get the sense
+
+```{r}
+head(cpds_subset)
+```
+
+Explore the distribution of Gini below. What can we observe?
+
+```{r}
+ggplot(cpds_subset) +
+  geom_histogram(aes(x = prefisc_gini)) 
+```
+
+What is an average Gini coefficient? Pay attention to the `na.rm = TRUE` argument.
+
+```{r}
+mean(cpds_subset$prefisc_gini, na.rm = TRUE)
+```
+Let's include this information on the plot, customizing it in the meantime. Pay attention to `theme_bw()` and `labs()` functions. You can explore ggplot themes [here](https://ggplot2.tidyverse.org/reference/ggtheme.html).
+
+```{r}
+ggplot(cpds_subset) +
+  geom_histogram(aes(x = prefisc_gini))  +
+  geom_vline(xintercept = mean(cpds_subset$prefisc_gini, na.rm = TRUE), color = "red") +
+  theme_bw() +
+  labs(x = "Gini Coefficient",
+       y = "Count",
+       title = "Distribution of Gini Coefficient")
+```
+
+Let's explore the distribution by groups. For example, EU countries to non-EU countries. USe `eu` variable for this and `geom_boxplot()`. But wow! We didn't get the group comparison, any ideas why?
+
+```{r}
+ggplot(cpds_subset) +
+  geom_boxplot(aes(y = prefisc_gini, x = eu)) 
+```
+
+Let's correct the class of variables. We'll discuss the classes more in a detail next week*. Fantastic! Are these groups different?
+
+```{r}
+cpds_subset %>%
+  mutate(eu = as.factor(eu)) %>%
+  ggplot() +
+  geom_boxplot(aes(y = prefisc_gini, x = eu)) 
+```
+
+::: {.callout-tip icon="false"}
+## Coding Task
+
+Let's explore these variables:
+
+-   `openc` - Openness of the economy (trade as % of GDP)
+
+-   `poco` -  post-communist countries post-communist countries identification
+
+They are already in `cpds_subset`. Draw a distribution of `openc` variable.
+
+```{r}
+#| eval: false
+
+ggplot(...) +
+  geom_histogram(aes(x = ...)) 
+```
+
+Add an average of `openc` to the plot using `geom_vline()`
+
+```{r}
+#| eval: false
+
+ggplot(cpds_subset) +
+  geom_histogram(...(x = ...)) +
+  ...(xintercept = mean(cpds_subset$openc))
+```
+
+
+:::
+
+
+
+
 Types of relationship:
 
 - Descriptive
@@ -51,10 +192,13 @@ Types of relationship:
 
 - Causal
 
-#
-
-Codebook
 
 # Exploring missing values
 
-# Sampling
+-   What are potential biases 
+
+# Sampling Biases
+
+# Some Tips
+
+-   QoG and V-Dem were covered in the Lecture

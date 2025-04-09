@@ -1,0 +1,33 @@
+---
+title: "..."
+subtitle: "Week 3"
+date: 2025-04-10
+format: 
+  html:
+    embed-resources: true
+toc: true
+---
+
+Data classes
+
+```{r}
+#| warning: false
+
+library(DiagrammeR)
+mermaid("
+graph LR
+    D[Data] --> C[Categorical]
+    D --> N[Numerical]
+    C --> no[Nominal]
+    C --> Or[Ordinal]
+    N --> di[Discrete]
+    N --> co[Continuous]
+    no --> f[Factor]
+    no --> c[Character]
+    Or --> f[Factor]
+    Or --> c[Character]
+    di --> i[Integer]
+    co --> n[Numeric]
+")
+```
+

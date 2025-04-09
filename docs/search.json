@@ -142,9 +142,9 @@
   {
     "objectID": "ps312-d_02.html",
     "href": "ps312-d_02.html",
-    "title": "ps312-d_02",
+    "title": "Exploring Data",
     "section": "",
-    "text": "This whole website was built using R, Markdown and Quarto. Let’s quickly overview these languages\nIn RStudio, you can use Markdown language to format text.\nFor example, this is bold text and this is italic text. And, of course, you can insert images. It’s pretty easy, and after the class you can take a look at some tutorials.\n\n\n\nNorthwestern Logo\n\n\nYou can do many-many more different things. In this regard, visual editor in RStudio might be helpful. Markdown is also used in several note taking apps, e.g. Obsidian or Notion. Feel free to utilize your Markdown knowledge for your studies.\nGenerally, what we’ve done so far can be described by the image below. We have used R (“engine”) and RStudio (“car”). In Rstudio we have Quarto, which is this document you are working with right now. We can do a lot of things right away – e.g., render our output to a Word document, PDF or HTML.\n\n\n\nR software"
+    "text": "What is a Causal Relation?\nWhat is Confounder?\nIndependent Variable vs Dependent Variable?\nControl Variable?\n\n\n\n\n\nWhat is a Chunk?\nWhat is a CSV vs Excel?"
   },
   {
     "objectID": "ps312-d_02.html#markdown-and-quarto",
@@ -152,5 +152,19 @@
     "title": "ps312-d_02",
     "section": "",
     "text": "This whole website was built using R, Markdown and Quarto. Let’s quickly overview these languages\nIn RStudio, you can use Markdown language to format text.\nFor example, this is bold text and this is italic text. And, of course, you can insert images. It’s pretty easy, and after the class you can take a look at some tutorials.\n\n\n\nNorthwestern Logo\n\n\nYou can do many-many more different things. In this regard, visual editor in RStudio might be helpful. Markdown is also used in several note taking apps, e.g. Obsidian or Notion. Feel free to utilize your Markdown knowledge for your studies.\nGenerally, what we’ve done so far can be described by the image below. We have used R (“engine”) and RStudio (“car”). In Rstudio we have Quarto, which is this document you are working with right now. We can do a lot of things right away – e.g., render our output to a Word document, PDF or HTML.\n\n\n\nR software"
+  },
+  {
+    "objectID": "ps312-d_02.html#substantive",
+    "href": "ps312-d_02.html#substantive",
+    "title": "Exploring Data",
+    "section": "",
+    "text": "What is a Causal Relation?\nWhat is Confounder?\nIndependent Variable vs Dependent Variable?\nControl Variable?"
+  },
+  {
+    "objectID": "ps312-d_02.html#coding",
+    "href": "ps312-d_02.html#coding",
+    "title": "Exploring Data",
+    "section": "",
+    "text": "What is a Chunk?\nWhat is a CSV vs Excel?"
   }
 ]

@@ -7,7 +7,7 @@ project:
     - "!drafts.qmd"
 
 website:
-  title: "PS312: Statistical Research Methods"
+  title: "PS312 Statistical Research Methods"
   favicon: fav.png
   navbar:
     left:
