@@ -14,6 +14,8 @@ toc: true
 
 -   But! Script will be published on the website. Go through it! Data classes will be discussed there!
 
+-   Questions regarding Lab Assignment or the class?
+
 <br><center>
 <a href="https://artur-baranov.github.io/nu-ps312-ds/scripts/ps312-d_02.qmd" class="btn btn-primary" role="button" download="ps312-d_02.qmd" style="width:200px" target="_blank">Download script</a>
 </center>
@@ -41,8 +43,6 @@ toc: true
 -   What is a CSV file? How is it different from Excel file?
 
 # Agenda
-
--   Questions regarding Lab Assignment or the class?
 
 -   Continuing to adapt to R and RStudio
 
