@@ -243,7 +243,7 @@ missing_years %>%
        y = "Count")
 ```
 
-Substantively, it is clear that there are some problems with the data we have to account for: the older the data, the worse is the record of Gini Coefficient.
+Substantively, it is clear that there are some problems with the data we have to account for: the older the data, the worse is the record track of Gini Coefficient.
 
 # Some Tips
 
