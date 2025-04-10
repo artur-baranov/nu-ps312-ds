@@ -31,3 +31,4 @@ graph LR
 ")
 ```
 
+aes in ggplot() and aes in geom()
