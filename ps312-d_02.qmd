@@ -38,7 +38,7 @@ toc: true
 
 -   What is a Chunk?
 
--   What is a CSV vs Excel?
+-   What is a CSV file? How is it different from Excel file?
 
 # Agenda
 
@@ -48,8 +48,7 @@ toc: true
 
 -   Exploring Data
 
--   Keeping track of Missingness
-
+-   Tracking Missingness
 
 # Markdown and Quarto
 
@@ -234,7 +233,7 @@ missing_years %>%
 ```
 
 
-Finally, let's plot it using `geom_col()` - which is quite similar to `geom_histogram()`. Take a moment to compare it. Substantivelly, it is clear that there are some problems with the data we have to account for: the older the data, the worse is the record of Gini Coefficient.
+Finally, let's plot it using `geom_col()` - which is quite similar to `geom_histogram()`. Take a moment to compare it. Substantively, it is clear that there are some problems with the data we have to account for: the older the data, the worse is the record of Gini Coefficient.
 
 ```{r}
 missing_years %>%
@@ -253,6 +252,8 @@ missing_years %>%
 -   Additionally, take a look on this [list of datasets](https://github.com/erikgahner/PolData)
 
 -   Sometimes we start with a question and then search for the data. However, sometimes it's the opposite: there's data available, and we ask, 'What can I use it for?'
+
+-   Merging dataframes are not as trivial, we will cover it in the future. But if you need it right now for you project, check this [tutorial](https://rpubs.com/williamsurles/293454)
 
 # Check List
 
