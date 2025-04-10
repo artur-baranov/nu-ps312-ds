@@ -5084,7 +5084,7 @@ Coding Task
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cpds_subset <span class="ot">=</span> cpds_subset <span class="sc">%&gt;%</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gini_na =</span> <span class="fu">is.na</span>(prefisc_gini))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now, let’s graph the dynamics. Which years have more missing values, and which have fewer?</p>
+<p>Now, check the dynamics in years. Let’s wrangle the data to count the number of missing/non-missing values per year.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>missing_years <span class="ot">=</span> cpds_subset <span class="sc">%&gt;%</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, gini_na) <span class="sc">%&gt;%</span></span>
@@ -5105,7 +5105,7 @@ Coding Task
 6  1964 FALSE       1</code></pre>
 </div>
 </div>
-<p>Finally, let’s plot it using <code>geom_col()</code> - which is quite similar to <code>geom_histogram()</code>. Take a moment to compare it. Substantively, it is clear that there are some problems with the data we have to account for: the older the data, the worse is the record of Gini Coefficient.</p>
+<p>Finally, let’s plot it using <code>geom_col()</code> - which is quite similar to <code>geom_histogram()</code>. Take a moment to compare it. Which years have more missing values, and which have fewer?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>missing_years <span class="sc">%&gt;%</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -5121,6 +5121,7 @@ Coding Task
 </div>
 </div>
 </div>
+<p>Substantively, it is clear that there are some problems with the data we have to account for: the older the data, the worse is the record of Gini Coefficient.</p>
 </section>
 <section id="some-tips" class="level1">
 <h1>Some Tips</h1>

@@ -221,7 +221,7 @@ cpds_subset = cpds_subset %>%
   mutate(gini_na = is.na(prefisc_gini))
 ```
 
-Now, let's graph the dynamics. Which years have more missing values, and which have fewer?
+Now, check the dynamics in years. Let's wrangle the data to count the number of missing/non-missing values per year.
 
 ```{r}
 missing_years = cpds_subset %>%
@@ -232,8 +232,7 @@ missing_years %>%
   head()
 ```
 
-
-Finally, let's plot it using `geom_col()` - which is quite similar to `geom_histogram()`. Take a moment to compare it. Substantively, it is clear that there are some problems with the data we have to account for: the older the data, the worse is the record of Gini Coefficient.
+Finally, let's plot it using `geom_col()` - which is quite similar to `geom_histogram()`. Take a moment to compare it.  Which years have more missing values, and which have fewer?
 
 ```{r}
 missing_years %>%
@@ -244,6 +243,7 @@ missing_years %>%
        y = "Count")
 ```
 
+Substantively, it is clear that there are some problems with the data we have to account for: the older the data, the worse is the record of Gini Coefficient.
 
 # Some Tips
 
