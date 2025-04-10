@@ -4928,7 +4928,7 @@ vertical-align: -.125em;
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cpds_subset <span class="ot">=</span> cpds <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, country, prefisc_gini, eu, openc, poco) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>How does the data look like? Using <code>head()</code> let’s present first rows to get the sense</p>
+<p>How does the data look like? Using <code>head()</code> let’s present first rows to get the sense. What is NA?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cpds_subset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -4993,7 +4993,7 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>Let’s explore the distribution by groups. For example, EU countries to non-EU countries. USe <code>eu</code> variable for this and <code>geom_boxplot()</code>. But wow! We didn’t get the group comparison, any ideas why?</p>
+<p>Let’s explore the distribution by groups. For example, EU countries to non-EU countries. Use <code>eu</code> variable for this and <code>geom_boxplot()</code>. But wow! We didn’t get the group comparison, any ideas why?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cpds_subset) <span class="sc">+</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> prefisc_gini, <span class="at">x =</span> eu)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
