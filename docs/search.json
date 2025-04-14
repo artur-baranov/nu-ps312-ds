@@ -18,7 +18,7 @@
     "href": "index.html#schedule",
     "title": "PS312 Statistical Research Methods",
     "section": "Schedule",
-    "text": "Schedule\n\n\n\n\n\nWeek\n\n\nTitle\n\n\nLink\n\n\nCode\n\n\nData\n\n\n\n\n\n\n1\n\n\nIntroduction to Statistical Methods\n\n\n\n\n\n\n\n\n\n\n\n\n\n2\n\n\nExploring Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Schedule\n\n\n\n\n\nWeek\n\n\nTitle\n\n\nLink\n\n\nCode\n\n\nData\n\n\n\n\n\n\n1\n\n\nIntroduction to Statistical Methods\n\n\n\n\n\n\n\n\n\n\n\n\n\n2\n\n\nExploring Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n3\n\n\nData Structures and Classes\n\n\n\n\n\n\n\n\n \n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -170,8 +170,29 @@
   {
     "objectID": "ps312-d_03.html",
     "href": "ps312-d_03.html",
+    "title": "Data Structures and Classes",
+    "section": "",
+    "text": "Delving into data structures\nDiscussing data classes"
+  },
+  {
+    "objectID": "ps312-d_03.html#vectors",
+    "href": "ps312-d_03.html#vectors",
+    "title": "Data Structures and Classes",
+    "section": "Vectors",
+    "text": "Vectors\nLet’s say we asked a group of people their ages in an Evanston coffee shop. We obtained the following data and assigned it to an object called age. The collection of obects called vector.\n\nage = c(18, 20, 21, 19, 24, 21, 20, 22)\n\nYou can access the data using indexing. Let’s say you entered the data into your object age as you were receiving the results. You can access the age of your second respondent by indicating [i] to an object.\n\nage[2]\n\n[1] 20\n\n\nwe can calculate the average age in our surveyed group.\n\nmean(age)\n\n[1] 20.625\n\n\nAlternatively, we can describe our data with minimum and maximum values.\n\nmin(age)\nmax(age)\n\n[1] 18\n[1] 24\n\n\nWe also asked people in the coffee shop about their majors and received the following data:\n\nmajor = c(\"computer science\", \"sociology\", \"sociology\", \"political science\", \"political science\", \"political science\", \"computer science\", \"sociology\")\n\n\n\n\n\n\n\nCoding Task\n\n\n\nInsert a chunk and access major of the 3rd respondent."
+  },
+  {
+    "objectID": "ps312-d_03.html#dataframes",
+    "href": "ps312-d_03.html#dataframes",
+    "title": "Data Structures and Classes",
+    "section": "Dataframes",
+    "text": "Dataframes\nA dataframe is one of the most commonly used data structures in data analysis. It is a simple table, similar to those you have probably seen in Excel. Let’s create one. We have two vectors, age and major. We can combine them into one table.\n\nrespondents = data.frame(age, major)\nrespondents\n\n  age             major\n1  18  computer science\n2  20         sociology\n3  21         sociology\n4  19 political science\n5  24 political science\n6  21 political science\n7  20  computer science\n8  22         sociology\n\n\nColumns are vectors. In a table format they are referred to as variables (and thus these labels are used interchangeably). Rows are called observations. There are some useful commands that provide information about your dataframe.\n\nNames of your variables\n\n\nnames(respondents)\n\n[1] \"age\"   \"major\"\n\n\n\nNumber of rows in your dataframe\n\n\nnrow(respondents)\n\n[1] 8\n\n\n\nNumber of columns in your dataframe\n\n\nncol(respondents)\n\n[1] 2\n\n\n\nNumber of dimensions (number of rows and columns)\n\n\ndim(respondents)\n\n[1] 8 2\n\n\nTo access a variable as vector you can use $ sign.\n\nrespondents$age\n\n[1] 18 20 21 19 24 21 20 22\n\n\nThis would allow you to manipulate this variable. For example, let’s visualize this data!\n\nhist(respondents$age)\n\n\n\n\n\n\n\n\nYou can easily combine previously used functions. For example, indexing provides access to any observation.\n\nrespondents$major[8]\n\n[1] \"sociology\"\n\n\n\n\n\n\n\n\nCoding Task\n\n\n\nLoad the data below and explore it. This is the embedded to R dataset, so you don’t need to load it externally.\n\ncars_information = mtcars\n\nHow many cars are listed in the dataframe (how many rows are there)?\nDescribe mpg variable. Include average, minimum and maximum.\nWhat is the minimum horsepower (hp)?\nAre there any cars that have horse power greater than 200 but less than 250?\nCreate a new variable called power_to_weight, which calculates the ratio of horsepower (hp) to weight (wt). You need to divide horsepower by weight. Use the snippet below.\n\ncars_information$power_to_weight = ... / ...\n\nWhat is an average Power to Weight Ratio?\nWhat is a minimum Power to Weight Ratio?\nCreate a histogram of power_to_weight variable. Hint: you can use previous discussion section scripts to get the code."
+  },
+  {
+    "objectID": "ps312-d_04.html",
+    "href": "ps312-d_04.html",
     "title": "…",
     "section": "",
-    "text": "Data classes\n\nlibrary(DiagrammeR)\nmermaid(\"\ngraph LR\n    D[Data] --&gt; C[Categorical]\n    D --&gt; N[Numerical]\n    C --&gt; no[Nominal]\n    C --&gt; Or[Ordinal]\n    N --&gt; di[Discrete]\n    N --&gt; co[Continuous]\n    no --&gt; f[Factor]\n    no --&gt; c[Character]\n    Or --&gt; f[Factor]\n    Or --&gt; c[Character]\n    di --&gt; i[Integer]\n    co --&gt; n[Numeric]\n\")"
+    "text": "clearing environment\naes in ggplot() and aes in geom()"
   }
 ]

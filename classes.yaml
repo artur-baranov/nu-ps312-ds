@@ -14,3 +14,10 @@
   Data: "[{{< fa database >}}](data/cpds.xlsx){target='_blank'}"
   type: "schedule"
 
+- title: "Data Structures and Classes"
+  Week: 3
+  date: 2025-04-17
+  Link: "[{{< fa link >}}](/ps312-d_03.qmd)"
+  Code: "[{{< fa file-code >}}](scripts/ps312-d_03.qmd){target='_blank'}"
+  type: "schedule"
+
