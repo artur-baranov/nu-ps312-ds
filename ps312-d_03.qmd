@@ -8,7 +8,82 @@ format:
 toc: true
 ---
 
-Data classes
+# Agenda
+
+-   Delving into data structures
+
+-   Discussing data classes
+
+-   
+
+
+
+
+# Data Structures
+
+## Vectors
+
+Let’s say we asked a group of people their ages in an Evanston coffee shop. We obtained the following data and assigned it to an object called `age`. The collection of obects called **vector**.
+
+```{r}
+age = c(18, 20, 21, 19, 24, 21, 20, 22)
+```
+
+You can access the data using indexing. Let’s say you entered the data into your object `age` as you were receiving the results. You can access the age of your second respondent by indicating `[i]` to an object.
+
+```{r}
+age[2]
+```
+we can calculate the average age in our surveyed group.
+
+```{r}
+mean(age)
+```
+
+Alternatively, we can describe our data with minimum and maximum values.
+
+```{r}
+#| results: hold
+
+min(age)
+max(age)
+```
+
+We also asked people in the coffee shop about their majors and received the following data:
+
+```{r}
+major = c("computer science", "sociology", "sociology", "political science", "political science", "political science", "computer science", "sociology")
+```
+
+::: {.callout-tip icon="false"}
+## Coding Task
+
+Insert a chunk and access major of the 3rd respondent.
+
+:::
+
+
+## Dataframes
+
+A dataframe is one of the most commonly used data structures in data analysis. It is a simple table, similar to those you have probably seen in Excel. Let’s create one. We have two vectors, `age` and `major.` We can combine them into one table.
+
+```{r}
+respondents = data.frame(age, major)
+respondents
+```
+
+Columns are vectors. In a table format they are referred to as variables (and thus these labels are used interchangeably). Rows are called observations. There are some useful commands that provide information about your dataframe.
+
+-   Names of your variables
+
+```{r}
+names(respondents)
+```
+
+
+# Data classes
+
+As you have noticed, we deal with different classes of data. Sometimes these are words (e.g., names of cars or majors) and numbers (e.g., age or horsepower). The analysis we perform is highly dependent on data classes. But before discussing it in a detail, we need to install one library that would help us to grasp this difference.
 
 ```{r}
 #| warning: false
@@ -30,5 +105,18 @@ graph LR
     co --> n[Numeric]
 ")
 ```
+
+These are the basic classes of data in R. Some examples might include:
+
+-   **Nominal**: Names, Labels, Brands, Country names, etc.
+
+-   **Ordinal**: Educational Levels (High School-BA-MA-PhD), Customer Rating (Unsatisfied-Neutral-Satisfied), etc.
+
+-   **Discrete**: Number of customers per day, number of seats won by political parties, etc. 
+
+-   **Continuous**: Height of people, voter turnout, etc. 
+
+For each object, vector, or variable, you can check its class
+
 
 aes in ggplot() and aes in geom()
