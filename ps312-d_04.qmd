@@ -1,0 +1,14 @@
+---
+title: "..."
+subtitle: "Week 3"
+date: 2025-04-10
+format: 
+  html:
+    embed-resources: true
+toc: true
+---
+
+clearing environment
+
+
+aes in ggplot() and aes in geom()
