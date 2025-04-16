@@ -1,14 +1,46 @@
 ---
-title: "..."
-subtitle: "Week 3"
-date: 2025-04-10
+title: "Simple Linear Regression"
+subtitle: "Week 4"
+date: 2025-04-24
 format: 
   html:
     embed-resources: true
 toc: true
 ---
 
-clearing environment
+# Before we start
+
+-   Questions regarding Lab Assignment or the class?
+
+-   clearing environment
+
+```{r}
+iris = iris   # embedded dataset
+b = 2
+
+rm(b)
+```
 
 
-aes in ggplot() and aes in geom()
+<br><center>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/scripts/ps312-d_04.qmd" class="btn btn-primary" role="button" download="ps312-d_02.qmd" style="width:200px" target="_blank">Download script</a>
+</center>
+<br>
+<center>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/data/..." class="btn btn-primary" role="button" download="..." style="width:200px" target="_blank">Download data</a>
+</center><br>
+
+
+# Agenda
+
+-   Wrangling data
+
+-   
+
+
+
+
+aes in ggplot() and aes in geom(), e.g. different continents in whr
+
+
+
