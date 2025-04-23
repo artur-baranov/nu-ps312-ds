@@ -23,7 +23,7 @@ rm(b)
 
 
 <br><center>
-<a href="https://artur-baranov.github.io/nu-ps312-ds/scripts/ps312-d_04.qmd" class="btn btn-primary" role="button" download="ps312-d_02.qmd" style="width:200px" target="_blank">Download script</a>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/scripts/ps312-d_04.qmd" class="btn btn-primary" role="button" download="ps312-d_04.qmd" style="width:200px" target="_blank">Download script</a>
 </center>
 <br>
 <center>
