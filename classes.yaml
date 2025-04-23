@@ -21,3 +21,10 @@
   Code: "[{{< fa file-code >}}](scripts/ps312-d_03.qmd){target='_blank'}"
   type: "schedule"
 
+- title: "Statistical Tests"
+  Week: 4
+  date: 2025-04-24
+  Link: "[{{< fa link >}}](/ps312-d_04.qmd)"
+  Code: "[{{< fa file-code >}}](scripts/ps312-d_04.qmd){target='_blank'}"
+  Data: "[{{< fa database >}}](data/vdem_regimes.RDS){target='_blank'}"
+  type: "schedule"
