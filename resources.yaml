@@ -1,3 +1,11 @@
 - title: "Installing R and RStudio"
   Number: 1
   Link: "[{{< fa link >}}](/ps312-d_00.qmd)"
+  
+- title: "Joining Data in R with dplyr"
+  Number: 2
+  Link: "[{{< fa link >}}](https://rpubs.com/williamsurles/293454)"
+  
+- title: "Political Science datasets"
+  Number: 3
+  Link: "[{{< fa link >}}](https://github.com/erikgahner/PolData)"
