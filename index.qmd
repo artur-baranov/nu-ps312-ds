@@ -10,7 +10,14 @@ listing:
     type: table
     fields: [Week, title, Link, Code, Data]
     filter-ui: false
-    sort: "week"
+    sort: "Week"
+    sort-ui: false
+  - id: resources
+    contents: resources.yaml
+    type: table
+    fields: [title, Link]
+    filter-ui: false
+    sort: "Number"
     sort-ui: false
 ---
 
@@ -44,4 +51,9 @@ This site is designed to support students enrolled in the PS312 Statistical Rese
 ## Schedule
 
 :::{#schedule}
+:::
+
+## Additional Resources
+
+:::{#resources}
 :::

@@ -193,7 +193,7 @@
     "href": "ps312-d_04.html",
     "title": "Statistical Tests",
     "section": "",
-    "text": "Questions regarding Lab Assignment or the class?\nclearing environment\n\n\niris = iris   # embedded dataset\nb = 2\n\nrm(b)\n\n\n\nDownload script\n\n\n\nDownload data"
+    "text": "Questions regarding Lab Assignment or the class?\n\n\n\nDownload script\n\n\n\nDownload data"
   },
   {
     "objectID": "ps312-d_04.html#analyzing-missing-data",
@@ -201,5 +201,12 @@
     "title": "Statistical Tests",
     "section": "Analyzing missing data",
     "text": "Analyzing missing data\nNow, we likely got a missing values as a result of the merger. The problem might arise due to the different spellings or absence of observation for specific year-country in one of the datasets.\nStart with is.na() – it checks if there are any missing values. And now, we can easily count if there are any missing values. Everything is here! Makes sense as we used left_join() to attach variables to WHR data.\n\nis.na(whr_vdem$Ladder_score) %&gt;%\n  sum()\n\n[1] 0\n\n\nHowever, the potential missingness might be in the “right” part of the merge, namely the V-Dem data. Let’s check it, too.\n\nis.na(whr_vdem$regime_categorical) %&gt;%\n  sum()\n\n[1] 22\n\n\nWhy this might be the case? Let’s explore. Using mutate() create an indicator variable for the missing values first. Then, using filter() let’s leave only missing values. And finally, using select() let’s leave only country names. What these observations have in common?\n\nmissing_data = whr_vdem %&gt;%\n  mutate(missing = is.na(regime_categorical)) %&gt;% # create indicator variable for missing data\n  filter(missing == TRUE) %&gt;%                     # leave only rows with missing regime type\n  select(Country_name)                            # choose the Country_name column\n\nmissing_data %&gt;%\n  head()\n\n               Country_name\n1             United States\n2  Taiwan Province of China\n3                Kazakhstan\n4                   Algeria\n5 Hong Kong S.A.R. of China\n6       Congo (Brazzaville)\n\n\nLet’s see how these are spelled in the V-Dem data. For example, let’s take how “United States” can be spelled. Using str_view() we can identify if the pattern exists in vdem_2022 dataframe.\n\nstr_view(vdem_2022$country_name, \"United States\")\n\n[16] │ &lt;United States&gt; of America\n\n\nNow, let’s see why there is no Kazakhstan. It is definitely missing! Probably, it was not yet ranked by V-Dem.\n\nvdem_2022 %&gt;%\n  filter(country_name == \"Kazakhstan\")\n\n  country_name year regime regime_categorical\n1   Kazakhstan 2022     NA               &lt;NA&gt;\n\n\nAll in all, these issues related to the most frequent reasons why data might be missing after merging:\n\n“Key” variables are spelled differently\nThe data is not available in one of the datasets\n\nWe’ll stick to removing NAs from the dataset using na.omit(). Check out tips in the end of the script to dig into other solutions to the problem of missing values.\n\nwhr_vdem = whr_vdem %&gt;% \n  na.omit()"
+  },
+  {
+    "objectID": "index.html#additional-resources",
+    "href": "index.html#additional-resources",
+    "title": "PS312 Statistical Research Methods",
+    "section": "Additional Resources",
+    "text": "Additional Resources\n\n\n\n\n\nTitle\n\n\nLink\n\n\n\n\n\n\nInstalling R and RStudio\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]

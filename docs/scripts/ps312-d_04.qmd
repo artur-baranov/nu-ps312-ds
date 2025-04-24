@@ -12,18 +12,8 @@ toc: true
 
 -   Questions regarding Lab Assignment or the class?
 
--   clearing environment
-
-```{r}
-iris = iris   # embedded dataset
-b = 2
-
-rm(b)
-```
-
-
 <br><center>
-<a href="https://artur-baranov.github.io/nu-ps312-ds/scripts/ps312-d_04.qmd" class="btn btn-primary" role="button" download="ps312-d_02.qmd" style="width:200px" target="_blank">Download script</a>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/scripts/ps312-d_04.qmd" class="btn btn-primary" role="button" download="ps312-d_04.qmd" style="width:200px" target="_blank">Download script</a>
 </center>
 <br>
 <center>
@@ -32,6 +22,15 @@ rm(b)
 
 
 # Agenda
+
+-   clearing environment
+
+```{r}
+iris = iris   # embedded dataset
+b = 2
+
+rm(b)
+```
 
 -   Wrangling data
 
@@ -43,7 +42,7 @@ rm(b)
 
 # Exploring Dataset
 
-Today we are working with the subset of V-Dem dataset. For your reference, their codebook is available [here](https://v-dem.net/documents/38/V-Dem_Codebook_v14.pdf).
+Today we are working with the subset of V-Dem dataset. For your reference, their codebook is available [here](https://v-dem.net/documents/38/V-Dem_Codebook_v14.pdf). Pay attention to `.RDS` file format.
 
 ```{r}
 #| message: false
@@ -80,7 +79,7 @@ Now, make sure everything is labelled correctly! Attention to `useNA = "always"`
 table(vdem$regime_categorical, useNA = "always")
 ```
 
-Now, let's draw a histogram. Basically, that's the same information.
+Now, let's draw a histogram.
 
 ```{r}
 vdem %>%
@@ -88,11 +87,9 @@ vdem %>%
   geom_histogram(aes(x = regime))
 ```
 
-Now, let's draw the same variable, but in categorical type of data. Try adding `stat = count` to the previous histogram, too. What does it change? Don't forget to refresh previous script in mind ([link](https://artur-baranov.github.io/nu-ps312-ds/ps312-d_03.html))!
+Now, let's draw the same variable, but in categorical type of data. Try adding `stat = count` to the previous histogram, too. What does it change? Don't forget to refresh previous script in mind ([link](https://artur-baranov.github.io/nu-ps312-ds/ps312-d_03.html))! Basically, we get the same information from the table.
 
 ```{r}
-#| eval: false
-
 vdem %>%
   ggplot() +
   geom_histogram(aes(x = regime_categorical), stat = "count")
@@ -131,8 +128,10 @@ whr_vdem = whr %>%
 Check the result
 
 ```{r}
+whr_vdem = whr_vdem %>%
+  select(Country_name, Ladder_score, regime, regime_categorical)
+
 whr_vdem %>%
-  select(Country_name, Ladder_score, regime, regime_categorical) %>%
   head()
 ```
 
@@ -282,6 +281,7 @@ ggplot() +
                  position = ...,
                  alpha = 0.6)
 ```
+
 Calculate and add a a median for "Other" continents to the plot. Customize the plot, add `theme_bw()` and a title!
 
 ```{r}
