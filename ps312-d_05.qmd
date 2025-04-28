@@ -1,0 +1,51 @@
+---
+title: "OLS Regression"
+subtitle: "Week 5"
+date: 2025-05-01
+format: 
+  html:
+    embed-resources: true
+toc: true
+---
+
+# Before we start
+
+-   Questions regarding Lab Assignment or the class?
+
+<br><center>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/scripts/ps312-d_05.qmd" class="btn btn-primary" role="button" download="ps312-d_05.qmd" style="width:200px" target="_blank">Download script</a>
+</center>
+<br>
+<center>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/data/vdem_regimes.RDS" class="btn btn-primary" role="button" download="vdem_regimes.RDS" style="width:200px" target="_blank">Download data</a>
+</center><br>
+
+
+# Agenda
+
+-   Running the regression
+
+-   Thinking about controls
+
+-   Replicating a study
+
+```{r}
+library(foreign)
+df = read.dta(choose.files())
+
+model = lm(v3Mdiff ~ truthvictim + fv8 + fv10 + fv11 + fv34 + fv27 + victory_lag + cw_duration_lag + damage + peace_agreement_lag + coldwar + polity2 + xratf + labor + v64mean, df)
+
+summary(model)
+
+```
+
+
+Appel, B.J. and Loyle, C.E., 2012. The economic benefits of justice: Post-conflict justice and foreign direct investment. *Journal of Peace Research*, 49(5), pp.685-699.
+
+```{r}
+summary(lm(v3Mdiff ~ truthvictim, df))
+```
+
+
+
+Concept - Operationalization
