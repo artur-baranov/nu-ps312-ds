@@ -17,7 +17,7 @@ toc: true
 </center>
 <br>
 <center>
-<a href="https://artur-baranov.github.io/nu-ps312-ds/data/vdem_regimes.RDS" class="btn btn-primary" role="button" download="vdem_regimes.RDS" style="width:200px" target="_blank">Download data</a>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/data/appelloyle_jprdata.dta" class="btn btn-primary" role="button" download="appelloyle_jprdata.dta" style="width:200px" target="_blank">Download data</a>
 </center><br>
 
 
@@ -29,18 +29,94 @@ toc: true
 
 -   Replicating a study
 
+-   Starting diagnostics
+
+# Set up
+
+Today we are working with data from a published academic paper.[^1] Let's replicate their study and think about the underlying causal relation. 
+
+[^1]: Appel, B.J. and Loyle, C.E., 2012. The economic benefits of justice: Post-conflict justice and foreign direct investment. *Journal of Peace Research*, 49(5), pp.685-699.
+
+::: {.callout-note icon="false"}
+## Qustion
+
+Here is the summary of the paper. 
+
+Appel and Loyle argue that post-conflict justice institutions act as credible signals of future stability, reducing investor uncertainty and thereby increasing foreign direct investment (FDI) in post-conflict states. They show empirically that post-conflict countries implementing restorative justice mechanisms receive significantly more FDI compared to those that do not, even after accounting for economic, political, and conflict-related factors.
+
+Extract the following information:
+
+-   **Dependent variable (outcome)**:
+
+-   **Independent variable (explanatory variable)**:
+
+-   **Mechanism (why IV has influence on DV)**: 
+
+-   **Control variables (potential confounders)**: 
+
+:::
+
+Let's fill in the directed acyclic graph (DAG) below.
+
+```{r}
+#| eval: false
+
+library(dagitty)
+
+dag_appel_loyle = dagitty('dag {
+                          IV -> DV
+                          control -> IV
+                          control -> DV
+                          ... -> ...
+                          }')
+plot(dag_appel_loyle)
+```
+
+# Simple Linear Regression
+
+Let's load the data first. We need `foreign` library to load Stata `.dta` files.
+
 ```{r}
 library(foreign)
-df = read.dta(choose.files())
+appel_loyle = read.dta("data/appelloyle_jprdata.dta")
+```
 
-model = lm(v3Mdiff ~ truthvictim + fv8 + fv10 + fv11 + fv34 + fv27 + victory_lag + cw_duration_lag + damage + peace_agreement_lag + coldwar + polity2 + xratf + labor + v64mean, df)
+Now, let's load the `tidyverse` library for data wrangling, and start exploring the dataset.
+
+```{r}
+#| message: false
+
+library(tidyverse)
+
+colnames(appel_loyle)
+```
+
+Doesn't seem straightforward, right? To get the sense of what's going on you can go to the original replication data folder of the study ([here](https://www.prio.org/journals/jpr/replicationdata)). But, to simplify the task, this script will guide you.
+
+Our dependent variable is `v3Mdiff` independent is `truthvictim`. Let's rename that for the sake of clarity, to foreign direct investments (fdi) and post-conflict justice (pcj) respectively.
+
+```{r}
+appel_loyle = appel_loyle %>%
+  mutate(fdi = v3Mdiff,
+         pcj = truthvictim)
+```
+
+Conceptually, post-conflict justice is operationalized as presence of truth commissions and reparations programs after the conflict.
+
+
+model = lm(v3Mdiff ~ truthvictim + fv8 + fv10 + fv11 + fv34 + fv27 + victory_lag + cw_duration_lag + damage + peace_agreement_lag + coldwar + polity2 + xratf + labor + v64mean, appel_loyle)
 
 summary(model)
 
-```
 
 
-Appel, B.J. and Loyle, C.E., 2012. The economic benefits of justice: Post-conflict justice and foreign direct investment. *Journal of Peace Research*, 49(5), pp.685-699.
+
+
+
+focus on economic 
+
+
+
 
 ```{r}
 summary(lm(v3Mdiff ~ truthvictim, df))
