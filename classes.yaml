@@ -28,3 +28,11 @@
   Code: "[{{< fa file-code >}}](scripts/ps312-d_04.qmd){target='_blank'}"
   Data: "[{{< fa database >}}](data/vdem_regimes.RDS){target='_blank'}"
   type: "schedule"
+
+- title: "OLS Regression"
+  Week: 5
+  date: 2025-05-01
+  Link: "[{{< fa link >}}](/ps312-d_05.qmd)"
+  Code: "[{{< fa file-code >}}](scripts/ps312-d_05.qmd){target='_blank'}"
+  Data: "[{{< fa database >}}](data/appelloyle_jprdata.dta){target='_blank'}"
+  type: "schedule"

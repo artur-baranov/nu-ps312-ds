@@ -56,12 +56,18 @@ Extract the following information:
 
 :::
 
+First, load the library
+
+```{r}
+#| warning: false
+
+library(dagitty)
+```
+
 Let's fill in the directed acyclic graph (DAG) below.
 
 ```{r}
 #| eval: false
-
-library(dagitty)
 
 dag_appel_loyle = dagitty('dag {
                           IV -> DV
@@ -78,7 +84,7 @@ Let's load the data first. We need `foreign` library to load Stata `.dta` files.
 
 ```{r}
 library(foreign)
-appel_loyle = read.dta("data/appelloyle_jprdata.dta")
+appel_loyle_raw = read.dta("data/appelloyle_jprdata.dta")
 ```
 
 Now, let's load the `tidyverse` library for data wrangling, and start exploring the dataset.
@@ -88,40 +94,203 @@ Now, let's load the `tidyverse` library for data wrangling, and start exploring 
 
 library(tidyverse)
 
-colnames(appel_loyle)
+colnames(appel_loyle_raw)
 ```
 
 Doesn't seem straightforward, right? To get the sense of what's going on you can go to the original replication data folder of the study ([here](https://www.prio.org/journals/jpr/replicationdata)). But, to simplify the task, this script will guide you.
 
-Our dependent variable is `v3Mdiff` independent is `truthvictim`. Let's rename that for the sake of clarity, to foreign direct investments (fdi) and post-conflict justice (pcj) respectively.
+Our dependent variable is `v3Mdiff` and independent is `truthvictim`. Let's rename that for the sake of clarity, to received foreign direct investments (fdi) and post-conflict justice (pcj) respectively.
 
 ```{r}
-appel_loyle = appel_loyle %>%
+appel_loyle = appel_loyle_raw %>%
   mutate(fdi = v3Mdiff,
          pcj = truthvictim)
 ```
 
 Conceptually, post-conflict justice is operationalized as presence of truth commissions and reparations programs after the conflict.
 
-
-model = lm(v3Mdiff ~ truthvictim + fv8 + fv10 + fv11 + fv34 + fv27 + victory_lag + cw_duration_lag + damage + peace_agreement_lag + coldwar + polity2 + xratf + labor + v64mean, appel_loyle)
-
-summary(model)
-
-
-
-
-
-
-focus on economic 
-
-
-
+First, explore the foreign direct investment. What do you notice?
 
 ```{r}
-summary(lm(v3Mdiff ~ truthvictim, df))
+#| message: false
+
+ggplot(appel_loyle) +
+  geom_histogram(aes(x = fdi)) +
+  theme_bw() +
+  labs(x = "Received Foreign Direct Investment",
+       y = "Count")
 ```
 
+Now, let's see the distribution of independent variable. How to fix the graph? When the graph is fixed, add the following line of code `scale_x_discrete(labels = c("Absent", "Present"))` to the graph.
 
+```{r}
+#| message: false
 
-Concept - Operationalization
+ggplot(appel_loyle) +
+  geom_histogram(aes(x = as.factor(pcj)), stat = "count") +
+  theme_light() +
+  labs(x = "Post-Conflict Institutions",
+       y = "Count")
+```
+
+Now, compare the distributions. 
+
+```{r}
+#| message: false
+
+ggplot(appel_loyle) +
+  geom_boxplot(aes(x = as.factor(pcj), y = fdi)) +
+  labs(x = "Post-Conflict Institutions",
+       y = "Received Foreign Direct Investment") +
+  scale_x_discrete(labels = c("Absent", "Present"))
+```
+
+Finally, let's set up a simple linear regression. What does it mean?
+
+```{r}
+slr_model = lm(fdi ~ pcj, appel_loyle)
+summary(slr_model)
+```
+
+# Multiple Linear Regression
+
+## Economic Controls
+
+Now, let's think through control that authors use. First, focus on several economic control variables:
+
+-   Economic development (`fv8`) measured as GDP per capita
+
+-   Economic size (`fv10`) measured as GDP
+
+-   Female Life expectancy (`v64mean`)
+
+Thus, this is how the authors model the real world. Does it raise any problems?
+
+```{r}
+econ_appel_loyle = dagitty('dag {
+                          PCJ -> FDI
+                          EconomicDvelopment -> PCJ
+                          EconomicDvelopment -> FDI
+                          EconomicSize -> FDI
+                          EconomicSize -> PCJ
+                          FLifeexpectancy -> FDI
+                          FLifeexpectancy -> PCJ
+                          }')
+plot(econ_appel_loyle)
+```
+
+Again, let's rename the variables for the sake of clarity
+
+```{r}
+appel_loyle = appel_loyle %>%
+  rename(econ_development = fv8,
+         econ_size = fv10,
+         flife_exp = v64mean)
+```
+
+Now, let's set up the multiple linear model! Do the results hold when we add controls?
+
+```{r}
+econ_model = lm(fdi ~ pcj + econ_development + econ_size + flife_exp, appel_loyle)
+summary(econ_model)
+```
+
+## Political Controls
+
+Now, let's add political institutions. 
+
+-   Domestic political constraints (`fv27`)
+
+-   Political regime (`polity2`)
+
+::: {.callout-tip icon="false"}
+## Coding Task
+
+First, add them to the DAG
+
+```{r}
+#| eval: false
+
+dagitty('dag {
+              PCJ -> FDI
+              EconomicDvelopment -> PCJ
+              EconomicDvelopment -> FDI
+              EconomicSize -> FDI
+              EconomicSize -> PCJ
+              FLifeexpectancy -> FDI
+              FLifeexpectancy -> PCJ
+              ...
+              ...
+                          }') %>%
+plot()
+```
+
+Now, rename the variables, `polity2` to `regime` and `fv27` to `constraints`.
+
+```{r}
+#| eval: false
+
+appel_loyle = appel_loyle ...
+  ...(regime = ...,
+      ... = fv27)
+```
+
+Extend the previous model by adding political institutions. Present `summary()`. Is the main independent variable statistically significant?
+
+```{r}
+#| eval: false
+
+pol_model = lm(..., appel_loyle)
+...
+```
+
+**Additional task**
+
+Install and load library `texreg`, then run the `screenreg()` function on your model. In your free time feel free to explore `htmlreg()` for HTML and `texreg()` for PDF
+
+:::
+
+# Model Diagnostics
+
+Let's take their full model, and run a quick diagnostic. The code below uses non-amended dataset, thus the names of the variables are not changed. Feel free to play around this after the section. 
+
+Most importantly, the PCJ is statistically significant.
+
+```{r}
+full_model = lm(v3Mdiff ~ truthvictim + fv8 + fv10 + fv11 + fv34 + fv27 + victory_lag + cw_duration_lag + damage + peace_agreement_lag + coldwar + polity2 + xratf + labor + v64mean, appel_loyle_raw)
+
+summary(full_model)
+```
+
+Let's load a `ggfortify` package for the diagnostics
+
+```{r}
+#| warning: false
+
+library(ggfortify)
+```
+
+We'll get back to diagnostics in the upcoming weeks: but as a beginning, and most importantly, these patterns highlight possible problems with the model. Quite likely there are some outliers that might drive the result. If you can wait to get into a detail in these plots, feel free to use this [tutorial](https://library.virginia.edu/data/articles/diagnostic-plots). 
+
+-   In your free time, try applying a log transformation to the dependent variable in the `full_model` and compare the diagnostic plots
+
+```{r}
+autoplot(full_model)
+```
+
+# Some Tips
+
+-   When thinking about the statistical relationship, pay attention to the mechanism and causal pathway: how and why IV influences DV?
+
+-   Visualize the distributions! Highlight potential problems in the preliminary stage of data analysis
+
+# Check List
+
+<input type="checkbox"/> I know how to explore variables, and plot their relationships
+
+<input type="checkbox"/> I am not afraid of multiple linear regression, and can easily interpret the coefficients and statistical significance
+
+<input type="checkbox"/> I am able to link my theoretical framework to empirically operationalized variables
+
+<input type="checkbox"/> I am gradually developing intuition behind model diagnostics
+

@@ -18,7 +18,7 @@
     "href": "index.html#schedule",
     "title": "PS312 Statistical Research Methods",
     "section": "Schedule",
-    "text": "Schedule\n\n\n\n\n\nWeek\n\n\nTitle\n\n\nLink\n\n\nCode\n\n\nData\n\n\n\n\n\n\n1\n\n\nIntroduction to Statistical Methods\n\n\n\n\n\n\n\n\n\n\n\n\n\n2\n\n\nExploring Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n3\n\n\nData Structures and Classes\n\n\n\n\n\n\n\n\n \n\n\n\n\n4\n\n\nStatistical Tests\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Schedule\n\n\n\n\n\nWeek\n\n\nTitle\n\n\nLink\n\n\nCode\n\n\nData\n\n\n\n\n\n\n1\n\n\nIntroduction to Statistical Methods\n\n\n\n\n\n\n\n\n\n\n\n\n\n2\n\n\nExploring Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n3\n\n\nData Structures and Classes\n\n\n\n\n\n\n\n\n \n\n\n\n\n4\n\n\nStatistical Tests\n\n\n\n\n\n\n\n\n\n\n\n\n\n5\n\n\nOLS Regression\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -208,5 +208,33 @@
     "title": "PS312 Statistical Research Methods",
     "section": "Additional Resources",
     "text": "Additional Resources\n\n\n\n\n\nTitle\n\n\nLink\n\n\n\n\n\n\nInstalling R and RStudio\n\n\n\n\n\n\n\nJoining Data in R with dplyr\n\n\n\n\n\n\n\nPolitical Science datasets\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "ps312-d_05.html",
+    "href": "ps312-d_05.html",
+    "title": "OLS Regression",
+    "section": "",
+    "text": "Questions regarding Lab Assignment or the class?\n\n\n\nDownload script\n\n\n\nDownload data"
+  },
+  {
+    "objectID": "ps312-d_05.html#economic-controls",
+    "href": "ps312-d_05.html#economic-controls",
+    "title": "OLS Regression",
+    "section": "Economic Controls",
+    "text": "Economic Controls\nNow, let’s think through control that authors use. First, focus on several economic control variables:\n\nEconomic development (fv8) measured as GDP per capita\nEconomic size (fv10) measured as GDP\nFemale Life expectancy (v64mean)\n\nThus, this is how the authors model the real world. Does it raise any problems?\n\necon_appel_loyle = dagitty('dag {\n                          PCJ -&gt; FDI\n                          EconomicDvelopment -&gt; PCJ\n                          EconomicDvelopment -&gt; FDI\n                          EconomicSize -&gt; FDI\n                          EconomicSize -&gt; PCJ\n                          FLifeexpectancy -&gt; FDI\n                          FLifeexpectancy -&gt; PCJ\n                          }')\nplot(econ_appel_loyle)\n\nPlot coordinates for graph not supplied! Generating coordinates, see ?coordinates for how to set your own.\n\n\n\n\n\n\n\n\n\nAgain, let’s rename the variables for the sake of clarity\n\nappel_loyle = appel_loyle %&gt;%\n  rename(econ_development = fv8,\n         econ_size = fv10,\n         flife_exp = v64mean)\n\nNow, let’s set up the multiple linear model! Do the results hold when we add controls?\n\necon_model = lm(fdi ~ pcj + econ_development + econ_size + flife_exp, appel_loyle)\nsummary(econ_model)\n\n\nCall:\nlm(formula = fdi ~ pcj + econ_development + econ_size + flife_exp, \n    data = appel_loyle)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-7348.9  -579.7   151.2   304.2 16072.0 \n\nCoefficients:\n                   Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)      -7.637e+02  1.711e+03  -0.446   0.6563    \npcj               1.544e+03  6.440e+02   2.397   0.0186 *  \necon_development  2.753e-03  1.295e-01   0.021   0.9831    \necon_size         7.561e-09  1.533e-09   4.933 3.68e-06 ***\nflife_exp         9.793e+00  3.118e+01   0.314   0.7542    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 2438 on 90 degrees of freedom\nMultiple R-squared:  0.3283,    Adjusted R-squared:  0.2985 \nF-statistic:    11 on 4 and 90 DF,  p-value: 2.63e-07"
+  },
+  {
+    "objectID": "ps312-d_05.html#political-controls",
+    "href": "ps312-d_05.html#political-controls",
+    "title": "OLS Regression",
+    "section": "Political Controls",
+    "text": "Political Controls\nNow, let’s add political institutions.\n\nDomestic political constraints (fv27)\nPolitical regime (polity2)\n\n\n\n\n\n\n\nCoding Task\n\n\n\nFirst, add them to the DAG\n\ndagitty('dag {\n              PCJ -&gt; FDI\n              EconomicDvelopment -&gt; PCJ\n              EconomicDvelopment -&gt; FDI\n              EconomicSize -&gt; FDI\n              EconomicSize -&gt; PCJ\n              FLifeexpectancy -&gt; FDI\n              FLifeexpectancy -&gt; PCJ\n              ...\n              ...\n                          }') %&gt;%\nplot()\n\nNow, rename the variables, polity2 to regime and fv27 to constraints.\n\nappel_loyle = appel_loyle ...\n  ...(regime = ...,\n      ... = fv27)\n\nExtend the previous model by adding political institutions. Present summary(). Is the main independent variable statistically significant?\n\npol_model = lm(..., appel_loyle)\n...\n\nAdditional task\nInstall and load library texreg, then run the screenreg() function on your model. In your free time feel free to explore htmlreg() for HTML and texreg() for PDF"
+  },
+  {
+    "objectID": "ps312-d_05.html#footnotes",
+    "href": "ps312-d_05.html#footnotes",
+    "title": "OLS Regression",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAppel, B.J. and Loyle, C.E., 2012. The economic benefits of justice: Post-conflict justice and foreign direct investment. Journal of Peace Research, 49(5), pp.685-699.↩︎"
   }
 ]
