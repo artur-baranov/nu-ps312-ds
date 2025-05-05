@@ -1,0 +1,119 @@
+---
+title: "Regression Diagnostics"
+subtitle: "Week 6"
+date: 2025-05-08
+format: 
+  html:
+    embed-resources: true
+toc: true
+---
+
+# Before we start
+
+-   Questions regarding Lab Assignment or the class?
+
+<br><center>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/scripts/ps312-d_06.qmd" class="btn btn-primary" role="button" download="ps312-d_06.qmd" style="width:200px" target="_blank">Download script</a>
+</center>
+<br>
+<center>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/data/appelloyle_jprdata.dta" class="btn btn-primary" role="button" download="appelloyle_jprdata.dta" style="width:200px" target="_blank">Download data</a>
+</center><br>
+
+# Agenda
+
+-   Using dummy variables in the OLS
+
+-   Introducing fixed effects and interactions
+
+-   Discussing polynomials
+
+## Set Up
+
+Today we are working with WhoGov dataset. As usual, I recommend taking a look at their [codebook](https://politicscentre.nuffield.ox.ac.uk/media/4117/whogov_codebook.pdf).
+
+```{r}
+#| message: false
+
+library(tidyverse)
+
+whogov = read.csv("data/WhoGov.csv")
+```
+
+First of all, these are the following variables we are going to work with today:
+
+-   `country_name` is a country name
+
+-   `n_individuals` number of unique persons in the cabinet
+
+-   `leaderexperience_continuous` the number of years the person has been leader of the country in total.
+
+-   `leader_party` party of the leader
+
+Start with exploring the distribution of number of unique persons in the cabinet (`n_individuals`)
+
+```{r}
+#| message: false
+
+ggplot(whogov) +
+  geom_histogram(aes(x = n_individuals)) 
+```
+
+Let’s examine whether a country's leader being independent from a political party is associated with having more or fewer members in their cabinet. First, let's create a dummy variable indicating if a leader is independent or non-independent. You can use 1 or 0 instead, but to make it more readable here we stick to more transparent labels.
+
+```{r}
+whogov = whogov %>%
+  mutate(indep = ifelse(leader_party == "independent", "Independent", "Non-independent"))
+```
+
+Now, build a simple model and explore the effect. On average, being a non-independent (i.e. partisan) leader is associated with having 2.28 more members in their cabinet compared to independent leaders.
+
+```{r}
+lm(n_individuals ~ indep, whogov) %>%
+  summary()
+```
+
+What if we want to know the effect relative to Non-independent leader? Let's `relevel()` the variable!
+
+```{r}
+#| eval: false
+
+whogov$indep = relevel(whogov$indep, ref = "Non-independent")
+```
+
+Oops! This is why classes of data are important. Fix it!
+
+```{r}
+whogov$indep = as.factor(whogov$indep)
+```
+
+Now we can relevel the variable
+
+```{r}
+whogov$indep = relevel(whogov$indep, ref = "Non-independent")
+```
+
+Compare the models. Does the result sound reasonable? Pretty much. This is simply an inverse. But things get way more interesting if a categorical variable has more than 2 levels. You will see this later on. 
+
+```{r}
+lm(n_individuals ~ indep, whogov) %>%
+  summary()
+```
+
+
+
+
+```{r}
+mod = lm(log(n_individuals) ~ log(leaderexperience_continuous) * indep + country_name + as.factor(year), whogov)
+
+library(lmtest)
+plot(mod)
+bptest(mod)
+
+summary(mod)
+
+```
+
+
+
+
