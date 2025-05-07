@@ -1,5 +1,5 @@
 ---
-title: "Regression Diagnostics"
+title: "Regression Extensions"
 subtitle: "Week 6"
 date: 2025-05-08
 format: 
@@ -17,7 +17,7 @@ toc: true
 </center>
 <br>
 <center>
-<a href="https://artur-baranov.github.io/nu-ps312-ds/data/appelloyle_jprdata.dta" class="btn btn-primary" role="button" download="appelloyle_jprdata.dta" style="width:200px" target="_blank">Download data</a>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/data/WhoGov.csv" class="btn btn-primary" role="button" download="WhoGov.csv" style="width:200px" target="_blank">Download data</a>
 </center><br>
 
 # Agenda
@@ -26,9 +26,9 @@ toc: true
 
 -   Introducing fixed effects and interactions
 
--   Discussing polynomials
 
-## Set Up
+
+# Set Up
 
 Today we are working with WhoGov dataset. As usual, I recommend taking a look at their [codebook](https://politicscentre.nuffield.ox.ac.uk/media/4117/whogov_codebook.pdf).
 
@@ -59,11 +59,13 @@ ggplot(whogov) +
   geom_histogram(aes(x = n_individuals)) 
 ```
 
+# Dummy Variables
+
 Let’s examine whether a country's leader being independent from a political party is associated with having more or fewer members in their cabinet. First, let's create a dummy variable indicating if a leader is independent or non-independent. You can use 1 or 0 instead, but to make it more readable here we stick to more transparent labels.
 
 ```{r}
 whogov = whogov %>%
-  mutate(indep = ifelse(leader_party == "independent", "Independent", "Non-independent"))
+  mutate(indep = ifelse(leader_party == "independent", "Independent", "Partisan"))
 ```
 
 Now, build a simple model and explore the effect. On average, being a non-independent (i.e. partisan) leader is associated with having 2.28 more members in their cabinet compared to independent leaders.
@@ -73,12 +75,12 @@ lm(n_individuals ~ indep, whogov) %>%
   summary()
 ```
 
-What if we want to know the effect relative to Non-independent leader? Let's `relevel()` the variable!
+What if we want to know the effect relative to Partisan leader? Let's `relevel()` the variable!
 
 ```{r}
 #| eval: false
 
-whogov$indep = relevel(whogov$indep, ref = "Non-independent")
+whogov$indep = relevel(whogov$indep, ref = "Partisan")
 ```
 
 Oops! This is why classes of data are important. Fix it!
@@ -90,7 +92,7 @@ whogov$indep = as.factor(whogov$indep)
 Now we can relevel the variable
 
 ```{r}
-whogov$indep = relevel(whogov$indep, ref = "Non-independent")
+whogov$indep = relevel(whogov$indep, ref = "Partisan")
 ```
 
 Compare the models. Does the result sound reasonable? Pretty much. This is simply an inverse. But things get way more interesting if a categorical variable has more than 2 levels. You will see this later on. 
@@ -100,6 +102,157 @@ lm(n_individuals ~ indep, whogov) %>%
   summary()
 ```
 
+## Fixed Effects
+
+Let’s explore how leader’s tenure is associated with the number of individuals in the government. We start with the simple linear regression. 
+
+```{r}
+lm(n_individuals ~ leaderexperience_continuous, whogov) %>%
+  summary()
+```
+
+::: {.callout-tip icon="false"}
+## Coding Task
+
+Take a moment and draw a scatterplot for n_individuals and leaderexperience_continuous. Add a regression line to the plot.
+
+```{r}
+
+```
+
+
+:::
+
+Now, let’s add a categorical variable, indep, to the model. By doing so, we assume that the association between the leader’s tenure and the number of individuals in the government differs depending on whether the leader is independent or partisan.
+
+Practically, this could be done in multiple ways. First, let’s discuss introduction of **fixed effects** to our model. Moreover, this is a **Multiple linear regression**!
+
+```{r}
+model_fe = lm(n_individuals ~ leaderexperience_continuous + indep, whogov) 
+summary(model_fe)
+```
+
+We will use `ggeffects` library for visualization of regression with the fixed effects. This is sort of an addition to `ggplot2` library from `tidyverse.` Don’t forget to install it using `install.packages()`!
+
+```{r}
+library(ggeffects)
+```
+
+Then, visualize the result. What can we see?
+
+```{r}
+ggpredict(model_fe, terms = c("leaderexperience_continuous", "indep")) %>%
+  plot()
+```
+
+Let’s customize the plot. It should be relatively straightforward given we know `ggplot` functions. Details for the customization of `plot()` function can be found on [ggeffects](https://strengejacke.github.io/ggeffects/reference/plot.html) website.
+
+```{r}
+ggpredict(model_fe, terms= c("leaderexperience_continuous", "indep")) %>%
+  plot(show_ci = F) +
+  labs(title = "Fixed Effects Regression",
+       x = "Tenure of a Leader",
+       y = "Number of Individuals in a Cabinet",
+       color = "Leader's Status") +
+  theme_bw()
+```
+
+Some common fixed effects include:
+
+-   Country/Region/State
+
+-   Individual leaders/Parties
+
+-   Year/Time
+
+-   Policy presence or absence
+
+By introducing fixed effects, we are able to control for unobserved confounders that vary across the units (not within!).
+
+## Interactions
+
+Often dummy variables are used to introduce an interaction term in the model. We will explore the association between `Perceptions_of_corruption` and number of people in the cabinet (`n_individuals`) depending on the independence of the party leader.
+
+The task isn’t trivial as now we planning to use data from two datasets, Let’s subset those.
+
+Load the World Happiness Report we used in the [First Meeting](https://artur-baranov.github.io/nu-ps312-ds/data/WHR.csv).
+
+```{r}
+whr = read.csv("data/WHR.csv")
+```
+
+Let's prepare the data
+
+```{r}
+whr_subset = whr %>%
+  select(Country_name, Perceptions_of_corruption)
+
+whogov_subset = whogov %>%
+  filter(year == 2021) %>%
+  select(country_name, n_individuals, indep)
+```
+
+Now, we are merging them.
+
+```{r}
+whr_whogov = whr_subset %>%
+  left_join(whogov_subset, by = c("Country_name" = "country_name")) 
+```
+
+Check the result
+
+```{r}
+head(whr_whogov)
+```
+
+Now, to interact variables we need to use asterisk `*`, i.e. multiplication.
+
+```{r}
+model_in = lm(Perceptions_of_corruption ~ n_individuals * indep, whr_whogov)
+summary(model_in)
+```
+
+Let’s plot the result.
+
+```{r}
+ggpredict(model_in, terms= c("n_individuals", "indep")) %>%
+  plot(show_ci = FALSE) +
+  labs(title = "Regression with Interaction Term",
+       x = "Number of Individuals in a Cabinet",
+       y = "Perception of Corruption",
+       color = "Leader's Status") +
+  theme_bw()
+```
+
+And you can easily simulate the data (i.e., calculate the marginal effect) using `ggpredict()`. For example,
+
+```{r}
+ggpredict(model_in, terms= c("n_individuals [12]", "indep [Independent]"))
+```
+
+# Diagnostics
+
+
+
+```{r}
+library(ggfortify)
+autoplot(model_in)
+
+library(MASS)
+boxcox(model_in)
+```
+
+```{r}
+model_in_fix = lm(I(Perceptions_of_corruption)^2 ~ n_individuals + indep, whr_whogov)
+autoplot(model_in)
+autoplot(model_in_fix)
+shapiro.test(model_in_fix$residuals)
+bptest(model_in_fix)
+
+ggplot(whr_whogov, aes(x = n_individuals, y = Perceptions_of_corruption, color = indep)) +
+  geom_point() +
+  geom_smooth()
+```
 
 
 
@@ -107,8 +260,8 @@ lm(n_individuals ~ indep, whogov) %>%
 mod = lm(log(n_individuals) ~ log(leaderexperience_continuous) * indep + country_name + as.factor(year), whogov)
 
 library(lmtest)
-plot(mod)
-bptest(mod)
+plot(model_in)
+bptest(model_in)
 
 summary(mod)
 
