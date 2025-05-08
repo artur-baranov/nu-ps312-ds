@@ -230,15 +230,29 @@ ggpredict(model_in, terms= c("n_individuals [12]", "indep [Independent]"))
 
 # Diagnostics
 
-Let's first identify if we have a problem.
+Let's first identify if we have a problem. Load the `ggfortify` library to draw the diagnostic plots.
 
 ```{r}
 library(ggfortify)
-autoplot(model_in, colour = "indep")
-
-shapiro.test(model_in_fix$residuals)
 ```
 
+And let's see the interaction model. What stands out?
+
+```{r}
+autoplot(model_in)
+```
+
+Let's visualize that by the independence/partisanship of the leader. Any patterns?
+
+```{r}
+autoplot(model_in, colour = "indep")
+```
+
+Actions to take:
+
+-   Add `system_category` from WhoGov
+
+-   Transform the dependent variable to the polynomial in second power
 
 
 ```{r}

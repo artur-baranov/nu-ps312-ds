@@ -1,0 +1,13 @@
+---
+title: "..."
+subtitle: "Week 7"
+date: 2025-05-15
+format: 
+  html:
+    embed-resources: true
+toc: true
+---
+
+ggally
+
+presenting results of regression
