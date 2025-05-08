@@ -26,8 +26,6 @@ toc: true
 
 -   Introducing fixed effects and interactions
 
-
-
 # Set Up
 
 Today we are working with WhoGov dataset. As usual, I recommend taking a look at their [codebook](https://politicscentre.nuffield.ox.ac.uk/media/4117/whogov_codebook.pdf).
@@ -232,22 +230,20 @@ ggpredict(model_in, terms= c("n_individuals [12]", "indep [Independent]"))
 
 # Diagnostics
 
-
+Let's first identify if we have a problem.
 
 ```{r}
 library(ggfortify)
-autoplot(model_in)
+autoplot(model_in, colour = "indep")
 
-library(MASS)
-boxcox(model_in)
+shapiro.test(model_in_fix$residuals)
 ```
 
+
+
 ```{r}
-model_in_fix = lm(I(Perceptions_of_corruption)^2 ~ n_individuals + indep, whr_whogov)
-autoplot(model_in)
-autoplot(model_in_fix)
-shapiro.test(model_in_fix$residuals)
-bptest(model_in_fix)
+model_in_fix = lm(I(Perceptions_of_corruption)^2 ~ n_individuals + indep + system_category, whr_whogov)
+
 
 ggplot(whr_whogov, aes(x = n_individuals, y = Perceptions_of_corruption, color = indep)) +
   geom_point() +
@@ -255,18 +251,5 @@ ggplot(whr_whogov, aes(x = n_individuals, y = Perceptions_of_corruption, color =
 ```
 
 
-
-```{r}
-mod = lm(log(n_individuals) ~ log(leaderexperience_continuous) * indep + country_name + as.factor(year), whogov)
-
-library(lmtest)
-plot(model_in)
-bptest(model_in)
-
-summary(mod)
-
-```
-
-
-
+Try adding `system_category` from `WhoGov` dataset as a control variable, and check the results for Q-Q
 
