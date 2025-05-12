@@ -6,6 +6,10 @@
   Number: 2
   Link: "[{{< fa link >}}](https://rpubs.com/williamsurles/293454)"
   
-- title: "Political Science datasets"
+- title: "Data Merging Example"
   Number: 3
+  Link: "[{{< fa link >}}](/ps312-joins.qmd)"
+  
+- title: "Political Science datasets"
+  Number: 4
   Link: "[{{< fa link >}}](https://github.com/erikgahner/PolData)"

@@ -1,0 +1,112 @@
+---
+title: "Joins Example"
+subtitle: "Merging Datasets in R"
+format: 
+  html:
+    embed-resources: true
+toc: true
+---
+
+# Devtools in R
+
+Sometimes, it is helpful to utilize versions of packages that are under development. Those are impossible to install directly, but you can download them frob GitHub. To simplify this process, you need special package called `devtools`.
+
+```{r}
+#| eval: false
+
+install.packages("devtools")
+```
+
+Now, install the `vdemdata` library. This way we'll be able to load the most current V-Dem dataset directly to the R.
+
+```{r}
+#| eval: false
+
+devtools::install_github("vdeminstitute/vdemdata")
+```
+
+Let's test it. We see the dataset is here! But for the future, this is the way to install packages that are not released yet.
+
+```{r}
+#| message: false
+
+library(tidyverse)
+library(vdemdata)
+vdem %>%
+  select(country_name, year, histname, v2x_polyarchy) %>%
+  head()
+```
+
+# Explorig Data
+
+We are working with [SIPRI Arms Transfers Database](https://www.sipri.org/databases/armstransfers). It contains information on all transfers of major conventional arms. The variables are: 
+
+-   `Recipient` of arms
+
+-   `Year` of the transfer
+
+-   `Import` of arms
+
+-   `Regime` a V-Dem variable for political regime
+
+```{r}
+sipri = read.csv("data/sipri.csv")
+```
+
+Let's see.
+
+```{r}
+head(sipri)
+```
+
+
+Now, subset some variables from V-Dem. We are choosing the following variables:
+
+-   `country_name` 
+
+-   `year` of the coded data
+
+-   `e_gdp` GDP of a country
+
+-   `e_miinteco` Armed conflict, international
+
+-   `e_miinterc` Armed conflict, internal 
+
+```{r}
+vdem_variables = vdem %>%
+  select(country_name, year, e_gdp, e_miinteco, e_miinterc)
+```
+
+Let's print first couple of observations
+
+```{r}
+head(vdem_variables)
+```
+
+# Merging Datasets
+
+Note the syntax below. We are joining two dataframes by two variables: `Recipient` and `Year`, but in the V-Dem data those have different name or spelling. 
+
+```{r}
+sipri_vdem = sipri %>%
+  left_join(vdem_variables, by = c("Recipient" = "country_name", 
+                                   "Year" = "year"))
+```
+
+Since we are using `left_join()`, the **SIPRI** variables are on the left
+
+![](https://raw.githubusercontent.com/gadenbuie/tidyexplain/main/images/left-join-extra.gif)
+
+Check the result
+
+```{r}
+head(sipri_vdem)
+```
+
+Now, we can save the data in RDS format
+
+```{r}
+#| eval: false
+saveRDS("sipri_vdem.RDS")
+```
+

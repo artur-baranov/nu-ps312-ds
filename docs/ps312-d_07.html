@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2025-05-15">
 
-<title>… – PS312 Statistical Research Methods</title>
+<title>Presenting Results of Regression – PS312 Statistical Research Methods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+}
+pre.numberSource { margin-left: 3em; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -4750,15 +4784,23 @@ vertical-align: -.125em;
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#before-we-start" id="toc-before-we-start" class="nav-link active" data-scroll-target="#before-we-start">Before we start</a></li>
+  <li><a href="#agenda" id="toc-agenda" class="nav-link" data-scroll-target="#agenda">Agenda</a></li>
+  <li><a href="#set-up" id="toc-set-up" class="nav-link" data-scroll-target="#set-up">Set up</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">…</h1>
+<h1 class="title">Presenting Results of Regression</h1>
 <p class="subtitle lead">Week 7</p>
 </div>
 
@@ -4782,10 +4824,50 @@ vertical-align: -.125em;
 </header>
 
 
+<section id="before-we-start" class="level1">
+<h1>Before we start</h1>
+<ul>
+<li>Questions regarding Lab Assignment or the class?</li>
+</ul>
+<br>
+<center>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/scripts/ps312-d_07.qmd" class="btn btn-primary" role="button" download="ps312-d_07.qmd" style="width:200px" target="_blank">Download script</a>
+</center>
+<br>
+<center>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/data/sipri.csv" class="btn btn-primary" role="button" download="sipri.csv" style="width:200px" target="_blank">Download data</a>
+</center>
+<p><br></p>
+</section>
+<section id="agenda" class="level1">
+<h1>Agenda</h1>
 <p>ggally</p>
 <p>presenting results of regression</p>
+</section>
+<section id="set-up" class="level1">
+<h1>Set up</h1>
+<p>We are working with <a href="https://www.sipri.org/databases/armstransfers">SIPRI Arms Transfers Database</a>. It contains information on all transfers of major conventional arms. The variables are:</p>
+<ul>
+<li><p><code>Recipient</code> of arms</p></li>
+<li><p><code>Year</code> of the transfer</p></li>
+<li><p><code>Import</code> of arms</p></li>
+<li><p><code>Regime</code> a V-Dem variable for political regime</p></li>
+</ul>
+<p>And, we subset some variables from V-Dem. We are choosing the following variables:</p>
+<ul>
+<li><p><code>country_name</code></p></li>
+<li><p><code>year</code> of the coded data</p></li>
+<li><p><code>e_gdp</code> GDP of a country</p></li>
+<li><p><code>e_miinteco</code> Armed conflict, international</p></li>
+<li><p><code>e_miinterc</code> Armed conflict, internal</p></li>
+</ul>
+<p>You can see how I merged two datasets <a href="https://artur-baranov.github.io/nu-ps312-ds/ps312-joins">here</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sipri_vdem <span class="ot">=</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/sipri_vdem.RDS&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

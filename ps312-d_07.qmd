@@ -1,5 +1,5 @@
 ---
-title: "..."
+title: "Presenting Results of Regression"
 subtitle: "Week 7"
 date: 2025-05-15
 format: 
@@ -8,6 +8,112 @@ format:
 toc: true
 ---
 
+# Before we start
+
+-   Questions regarding Lab Assignment or the class?
+
+<br><center>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/scripts/ps312-d_07.qmd" class="btn btn-primary" role="button" download="ps312-d_07.qmd" style="width:200px" target="_blank">Download script</a>
+</center>
+<br>
+<center>
+<a href="https://artur-baranov.github.io/nu-ps312-ds/data/sipri.csv" class="btn btn-primary" role="button" download="sipri.csv" style="width:200px" target="_blank">Download data</a>
+</center><br>
+
+# Agenda
+
 ggally
 
 presenting results of regression
+
+# Set up
+
+We are working with [SIPRI Arms Transfers Database](https://www.sipri.org/databases/armstransfers). It contains information on all transfers of major conventional arms. The variables are: 
+
+-   `Recipient` of arms
+
+-   `Year` of the transfer
+
+-   `Import` of arms
+
+-   `Regime` a V-Dem variable for political regime
+
+And, we subset some variables from V-Dem. We are choosing the following variables:
+
+-   `country_name` 
+
+-   `year` of the coded data
+
+-   `e_gdp` GDP of a country
+
+-   `e_miinteco` Armed conflict, international
+
+-   `e_miinterc` Armed conflict, internal 
+
+You can see how I merged two datasets [here](https://artur-baranov.github.io/nu-ps312-ds/ps312-joins)
+
+```{r}
+sipri_vdem = readRDS("data/sipri_vdem.RDS")
+```
+
+For our convenience, rename the variables in the newly created dataframe.
+
+```{r}
+sipri_vdem = sipri_vdem %>%
+  rename(GDP = e_gdp,
+         International_conflict = e_miinteco,
+         Internal_conflict = e_miinterc)
+
+head(sipri_vdem)
+```
+
+Explore the `GDP` variable. Does it need a transformation?
+
+```{r}
+#| warning: false
+
+ggplot(sipri_vdem) +
+  geom_histogram(aes(x = GDP))
+```
+
+It might be the case. But to double-check our assumption, let's draw a boxplot. Take the `log()` of GDP directly in the plot. Did it get better?
+
+```{r}
+ggplot(sipri_vdem) +
+  geom_boxplot(aes(y = log(GDP)))
+```
+
+Therefore, let's create a new variable `Log_GDP`.
+
+```{r}
+sipri_vdem = sipri_vdem %>%
+  mutate(Log_GDP = log(GDP))
+```
+
+To explore multiple variables at once, it is useful to plot them in `pairs` plot. There's a library `GGally` which is based on `ggplot2`, and it's quite straightforward. Be careful with the wrong class identification! Can you notice anything?
+
+```{r}
+#| warning: false
+#| message: false
+
+library(GGally)
+
+sipri_vdem %>%
+  ggpairs(columns = c("Import", "Regime", "Log_GDP", "International_conflict", "Internal_conflict"))
+```
+
+Don't forget to fix the classes of the variables!
+
+```{r}
+sipri_vdem$International_conflict = as.factor(sipri_vdem$International_conflict)
+sipri_vdem$Regime = as.factor(sipri_vdem$Regime)
+```
+
+# Model Building 
+
+Let's set up a basic model. We are interested in explaining the `Import` of arms. Is it related to the economic capacity of the state? We can use proxy `Log_GDP`. We can interpret and plot it quite easily, right? But does the intercept make sense?
+
+```{r}
+model_basic = lm(Import ~ Log_GDP, sipri_vdem)
+summary(model_basic)
+```
