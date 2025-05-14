@@ -53,6 +53,9 @@ And, we subset some variables from V-Dem. We are choosing the following variable
 You can see how I merged two datasets [here](https://artur-baranov.github.io/nu-ps312-ds/ps312-joins)
 
 ```{r}
+#| warning: false
+
+library(tidyverse)
 sipri_vdem = readRDS("data/sipri_vdem.RDS")
 ```
 
@@ -117,3 +120,165 @@ Let's set up a basic model. We are interested in explaining the `Import` of arms
 model_basic = lm(Import ~ Log_GDP, sipri_vdem)
 summary(model_basic)
 ```
+
+However, simple models are rare to see in academic articles. Let's run a Multiple Linear Regression with fixed effects. Add `International_conflict` and `Regime` to the model. You can interpret these coefficients easily, too.
+
+```{r}
+model_fe = lm(Import ~ Log_GDP + International_conflict + Regime, sipri_vdem)
+summary(model_fe)
+```
+
+To convey a better idea what's going on, you can plot these three independent variables. But what if there are more?
+
+```{r}
+#| warning: false
+library(ggeffects)
+
+ggpredict(model_fe, terms = c("Log_GDP", "International_conflict", "Regime")) %>%
+  plot()
+```
+
+Finally, let's set up another model. This time with an interaction effect. 
+
+```{r}
+model_int = lm(Import ~ Log_GDP * International_conflict + Regime, sipri_vdem)
+summary(model_int)
+```
+
+Again, to get a better idea what's going on, you can plot the three independent variables against the dependent variable. But the limitation remains the same, it's hard to include more variables into the graph.
+
+```{r}
+#| warning: false
+
+ggpredict(model_int, terms = c("Log_GDP", "International_conflict", "Regime")) %>%
+  plot() 
+```
+
+# Presentation of Results
+
+## Tables
+
+The most common way to present the results of the regression is in tables. For details and examples see [details](https://modelsummary.com/vignettes/modelsummary.html). 
+
+Don't forget to:
+
+-   Include p-values and $\alpha$ (critical values for stars display)!
+
+-   Include standard errors or confidence intervals for $\beta$
+
+-   If you have a categorical variable, mention the reference category
+
+-   $R^2$ for simple linear regression and $R^2_a$ for multiple linear regression
+
+-   Include number of observations
+
+Add the following argument: `output = "table.html"`.
+
+```{r}
+#| warning: false
+
+library(modelsummary)
+publishable_table = modelsummary(list("Base model" = model_basic,
+                    "Fixed Effects model" = model_fe,
+                    "Interaction model" = model_int),
+                   title = "Arms Import Models",  
+                   stars = TRUE,
+                   gof_omit = "AIC|BIC|Log.Lik|F|RMSE",
+                   coef_rename = c("(Intercept)", 
+                             "Log GDP", 
+                             "International Conflict", 
+                             "Regime: Democratic",
+                             "Regime: Electoral Authoritarian",
+                             "Regime: Minimally Democratic",
+                             "Log GDP × International Conflict"),
+                   notes = "Regime reference category: Autocratic")
+
+publishable_table
+```
+
+The more complex the model, the harder it is to interpret the results. Let's write out our models. You can often see these in articles. By plugging the coefficients we or our readers can calculate the predicted value for any GDP value, regime type and presence or absence of international conflict. 
+
+The basic model is easy, right?
+
+$$
+\text{Arms Import} = \beta_0 + \beta_1(\text{LogGDP}) 
+$$
+
+Now, fixed effects. It gets slightly trickier.
+
+$$
+\text{Arms Import} = \beta_0 + \beta_1(\text{LogGDP}) + \beta_2(\text{International Conflict}) + \beta_3(\text{Regime}) 
+$$
+
+And finally, interaction model. You can try to interpret the interaction, but we need to know the reference categories. Which is a bit of a hustle.
+
+$$
+\text{Arms Import} = \beta_0 + \beta_1(\text{LogGDP}) + \beta_2(\text{International Conflict}) + \beta_3(\text{Regime}) + \beta_4(\text{LogGDP} \times \text{International Conflict})
+$$  
+
+
+## Statistical Significance and Magnitude of $\beta$
+
+In `GGally` library there is a useful function `ggcoef()` which allows to to quickly plot the coefficients of a model. Feel free to explore variations of the function [here](https://larmarange.github.io/ggstats/reference/ggcoef_model.html).
+
+Plotting the effects is great to provide intuition about the significance and the magnitude of the effects. But! Don't forget about the scales! Are you comparing comparable? Scaling may be helpful: how can you compare one unit increase in `Log_GDP` to "one unit increase" in `International_conflict`?
+
+Moreover, you cannot interpret the magnitude of the interaction term, if you have it!
+
+```{r}
+ggcoef(model_fe,
+       exclude_intercept = TRUE) +
+  theme_bw()
+```
+
+## Predicted values and Marginal Effects
+
+Presenting predicted values provides the reader with intuition about what happens when variables take specific values. For example, we take the most typical GDP, and calculate the effects for two categorical variables: `International_conflict` and `Regime`. 
+
+```{r}
+#| warning: false
+
+ggpredict(model_int, terms = c("International_conflict", "Regime")) 
+```
+
+Let's make it look publishable. We wrangle the data a bit. By now, the code shouldn't stress you out. If it does, then run it step-by-step to get a sense of what's going on!
+
+```{r}
+model_int_groupped = ggpredict(model_int, terms = c("International_conflict", "Regime")) %>%
+  as.data.frame() %>%
+  rename(International_conflict = x,
+         Regime = group,
+         Import = predicted) 
+
+model_int_groupped
+```
+
+Finally, present the marginal effects using `tinytable`.[^1] The code below is quite messy, in your free time you can explore it in a more detail. For now, I want this code to be available to you. Add this line of code in the end: `save_tt("predicted_values.html")` to save the table on your machine.
+
+[^1]: Great example of research presenting the results in a similar manner can be found in Reuter, O.J. and Szakonyi, D., 2015. Online social media and political awareness in authoritarian regimes. *British Journal of Political Science*, 45(1), pp.29-51.
+
+```{r}
+#| message: false
+
+library(tinytable)
+
+model_int_groupped %>%
+  group_by(International_conflict, Regime) %>%
+  summarize(Import = paste0(round(Import, 3), "\n", "[", round(conf.low, 3), "; ", round(conf.high, 3), "]")) %>%
+  pivot_wider(names_from = Regime,
+              values_from = Import) %>%
+  mutate(International_conflict = ifelse(International_conflict == 1, "Present", "Absent")) %>%
+  rename(`International Conflict` = International_conflict) %>% 
+  tt(note = "Adjusted for average log of GDP (=8.64)") %>%
+  group_tt(j = list("Regime" = 2:5)) 
+```
+
+# Check List
+
+<input type="checkbox"/> I know how to use `GGally` to analyze pairs of variables 
+
+<input type="checkbox"/> I can plot complex models with `ggeffects` library
+
+<input type="checkbox"/> I know how to save `modelsummary()` output to my machine
+
+<input type="checkbox"/> I have an intuition about predicted values and marginal effects
