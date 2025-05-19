@@ -13,3 +13,7 @@
 - title: "Political Science datasets"
   Number: 4
   Link: "[{{< fa link >}}](https://github.com/erikgahner/PolData)"
+  
+- title: "Quarto for Writing Papers"
+  Number: 5
+  Link: "[{{< fa link >}}](https://quarto.org/docs/output-formats/typst.html)  [{{< fa link >}}](https://quarto.org/docs/authoring/markdown-basics.html)"

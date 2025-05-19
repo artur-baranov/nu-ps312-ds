@@ -1,0 +1,266 @@
+---
+title: "Quarter Review"
+subtitle: "PS312 Statistical Research Methods" 
+execute:
+  warning: false
+  message: false
+format: 
+  revealjs:
+    slide-number: c/t
+    show-slide-number: all
+    embed-resources: true
+    theme: custom.scss
+    code-overflow: scroll
+---
+
+## Review of the Quarter
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**Substantive** 
+
+::: {.incremental}
+-   Causality
+
+-   Mechanisms
+
+-   Confounders
+
+:::
+
+:::
+
+::: {.column width="50%"}
+**Technical**
+
+::: {.incremental}
+
+-   Statistical Tests
+
+-   Regressions
+
+-   Diagnostics
+:::
+
+:::
+
+::::
+
+## Distributions (I)
+
+::: {.panel-tabset}
+## Normal Distribution
+
+```{r, echo = FALSE}
+library(tidyverse)
+library(kableExtra)
+
+set.seed(123)
+
+norm_d = rnorm(10000)
+
+ggplot() +
+  geom_histogram(aes(x = norm_d)) +
+  labs(x = NULL,
+       y = NULL) +
+  theme_bw()
+```
+
+## Histogram Code
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| code-line-numbers: "5-9"
+set.seed(123)         # set seed for reproducibility
+
+norm_d = rnorm(10000) # generate random observations
+
+ggplot() +
+  geom_histogram(aes(x = norm_d)) +
+  labs(x = NULL,
+       y = NULL) +
+  theme_bw()
+```
+
+:::
+
+## Distributions (II)
+
+::: {.panel-tabset}
+
+## Normal Distribution (Boxplot)
+
+```{r, echo = FALSE}
+ggplot() +
+  geom_boxplot(aes(x = norm_d)) +
+  labs(x = NULL,
+       y = NULL) +
+  theme_bw()
+```
+
+## Boxplot Code
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+
+ggplot() +
+  geom_boxplot(aes(x = norm_d)) +
+  labs(x = NULL,
+       y = NULL) +
+  theme_bw()
+```
+
+:::
+
+
+## Distribution Comparisons
+
+::: {.panel-tabset}
+## Two Distributions
+
+```{r, echo = FALSE}
+set.seed(123)
+
+norm_x = rnorm(n = 10000, mean = 1, sd = 3)
+norm_y = rnorm(n = 10000, mean = 3, sd = 2)
+
+ggplot() +
+  geom_histogram(aes(x = norm_x, fill = "Distribution X"), alpha = 0.5) +
+  geom_histogram(aes(x = norm_y, fill = "Distribution Y"), alpha = 0.5) +
+  geom_vline(xintercept = mean(norm_x), color = "red") +
+  geom_vline(xintercept = mean(norm_y), color = "blue") +
+  labs(x = NULL,
+       y = NULL,
+       fill = NULL) +
+  theme_bw()
+```
+
+## Statistical Test
+
+```{r}
+#| echo: FALSE
+t.test(norm_x, norm_y)
+```
+
+
+## Code
+
+```{r}
+#| eval: FALSE
+#| echo: TRUE
+#| code-line-numbers: "|7,9|8,10|"
+set.seed(123)
+
+norm_x = rnorm(n = 10000, mean = 1, sd = 3)
+norm_y = rnorm(n = 10000, mean = 3, sd = 2)
+
+ggplot() +
+  geom_histogram(aes(x = norm_x, fill = "Distribution X"), alpha = 0.5) +
+  geom_histogram(aes(x = norm_y, fill = "Distribution Y"), alpha = 0.5) +
+  geom_vline(xintercept = mean(norm_x), color = "red") +
+  geom_vline(xintercept = mean(norm_y), color = "blue") +
+  labs(x = NULL,
+       y = NULL,
+       fill = NULL) +
+  theme_bw()
+```
+
+
+
+:::
+
+## Data Merging
+
+```{r}
+#| echo: TRUE
+df_x = data.frame(ID = c("1", "2", "3", "4"), 
+                X = c(34, 22, 19, 85))
+
+df_y = data.frame(ID = c("1", "2", "4", "4"), 
+                Y = c("Blue", "Red", "Green", "Yellow"))
+```
+
+::: {.column width="50%"}
+```{r}
+df_x %>%
+  kable()
+```
+
+:::
+
+::: {.column width="50%"}
+```{r}
+df_y %>%
+   kable()
+```
+
+:::
+
+## Data Merging
+
+::: {.panel-tabset}
+## Result
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+df_x %>% 
+  left_join(df_y, by = "ID") 
+```
+
+
+::: {.column width="25%"}
+```{r}
+df_x %>%
+  kable()
+```
+
+:::
+
+::: {.column width="25%"}
+```{r}
+
+df_y[1,] = cell_spec(df_y[1,], background = "lightblue")
+
+
+df_y %>%
+   kable() 
+```
+
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+ df_x %>% 
+   left_join(df_y, by = "ID") %>%
+   kable() 
+```
+:::
+
+## Visualization
+
+![](https://i.postimg.cc/T2nkXnG7/left-join.gif){fig-align="center"}
+
+:::
+
+## Libraries and Functions (I)
+
+| Library      | Functions                          | Description                                          |
+|--------------|------------------------------------|------------------------------------------------------|
+| tidyverse    | `filter()`, `mutate()`, `ggplot()` | data wrangling and visualization                     |
+| modelsummary | `modelsummary()`                   | present good looking tables                          |
+| ggeffects    | `ggpredict()`                      | calculate and visualize marginal effects             |
+
+## Libraries and Functions (II)
+
+| Library      | Functions                          | Description                                          |
+|--------------|------------------------------------|------------------------------------------------------|
+| GGally       | `ggpairs()`, `ggcoef()`            | extension to ggplot                                  |
+| ggfortify    | `autoplot()`                       | extension to ggplot for diagnostics                  |
+| lmtest       | `bptest()`                         | statistical tests for diagnostics                    |
+| car          | `vif()`                            | additional statistical tests for diagnostics         |

@@ -1,0 +1,53 @@
+---
+title: "Quarto and Quarter Review"
+subtitle: "Week 8"
+date: 2025-05-22
+format: 
+  html:
+    embed-resources: true
+toc: true
+---
+
+
+# Before we start
+
+-   Questions regarding Final Paper or the class?
+
+-   Next week no section, but office hours instead (Scott Hall 110)
+
+# Agenda
+
+-   Reviewing we have learned
+
+-   Quarto formatting
+
+# Quarter Review
+
+[<i>{{< fa arrow-up-right-from-square >}}</i> View slides in new window](https://artur-baranov.github.io/nu-ps312-ds/slides/ps312-s_08.html){.btn .btn-primary role="button" target="_blank"}
+
+<iframe height="500" width="100%" src="slides/ps312-s_08.html"></iframe>
+
+
+
+# What's next?
+
+# Datasets we have used
+
+| Dataset                                           | Description                                | Link                                                     |
+|---------------------------------------------------|--------------------------------------------|----------------------------------------------------------|
+| **V-Dem**                                         | Measures democracy worldwide               | [V-Dem](https://www.v-dem.net/)                          |
+| **World Happiness Report**                        | Annual happiness report                    | [World Happiness Report](https://worldhappiness.report/) |
+| **Who Governs**                                   | Dataset on political elites                | [Who Governs](https://doi.org/10.1017/S0003055420000490) |
+| **SIPRI**                                         | Data on military operations                | [SIPRI](https://www.sipri.org/databases)                 |
+| **Comparative Political Data Set**                | A dataset covering political institutions  | [CPDS](https://www.cpds-data.org/)                       |
+| 
+
+
+
+# Check List
+
+- [ ] I know that every lab has check list below! And I will use it to navigate what we have learned
+
+- [ ] R doesn't scare me anymore
+
+- [ ] I have developed the intuition behind application of quantitative methods
