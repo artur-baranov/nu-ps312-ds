@@ -42,9 +42,6 @@ toc: true
 | **Comparative Political Data Set**                | A dataset covering political institutions  | [CPDS](https://www.cpds-data.org/)                       |
 | 
 
-# Practice 
-
-
 
 
 # Check List
