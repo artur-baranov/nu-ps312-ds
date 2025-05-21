@@ -47,6 +47,22 @@ format:
 
 ::::
 
+## Causal Relationship
+
+![](videos/video-confounding-unblocked.gif){height=70% fig-align="center"}
+
+::: {style="font-size: 50%"}
+**Source:** Heiss, Andrew. *Program Evaluation*. [https://evalsp25.classes.andrewheiss.com/content/06-content.html](https://evalsp25.classes.andrewheiss.com/content/06-content.html)
+:::
+
+## Causal Relationship
+
+![](videos/video-confounding-blocked.gif){height=70% fig-align="center"}
+
+::: {style="font-size: 50%"}
+**Source:** Heiss, Andrew. *Program Evaluation*. [https://evalsp25.classes.andrewheiss.com/content/06-content.html](https://evalsp25.classes.andrewheiss.com/content/06-content.html)
+:::
+
 ## Distributions (I)
 
 ::: {.panel-tabset}
@@ -409,6 +425,8 @@ df_y %>%
 :::
 
 ## Model Interpretation
+
+
 
 ## Model Diagnostics
 

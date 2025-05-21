@@ -326,7 +326,7 @@
     "href": "slides/ps312-s_08.html#distribution-comparisons",
     "title": "Quarter Review",
     "section": "Distribution Comparisons",
-    "text": "Distribution Comparisons\n\nTwo DistributionsStatistical TestCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    Welch Two Sample t-test\n\ndata:  norm_x and norm_y\nt = -55.188, df = 17450, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -2.059542 -1.918262\nsample estimates:\nmean of x mean of y \n0.9928849 2.9817871 \n\n\n\n\n\nset.seed(123)                               # set the seed for reproducibility\n\nnorm_x = rnorm(n = 10000, mean = 1, sd = 3) # generate data with different properties\nnorm_y = rnorm(n = 10000, mean = 3, sd = 2) # generate data with different properties\n\nhis = ggplot() +\n  geom_histogram(aes(x = norm_x, fill = \"Distribution X\"), alpha = 0.5) +\n  geom_histogram(aes(x = norm_y, fill = \"Distribution Y\"), alpha = 0.5) +\n  geom_vline(xintercept = mean(norm_x), color = \"red\") +\n  geom_vline(xintercept = mean(norm_y), color = \"blue\") +\n  labs(x = NULL,\n       y = NULL,\n       fill = NULL) +\n  theme_bw()\n\nbox = ggplot() +\n  geom_boxplot(aes(x = norm_x, y = \"X\", fill = \"Distribution X\"), alpha = 0.5) +\n  geom_boxplot(aes(x = norm_y, y = \"Y\", fill = \"Distribution Y\"), alpha = 0.5) +\n  labs(x = NULL,\n       y = NULL,\n       fill = NULL) +\n  theme_bw()"
+    "text": "Distribution Comparisons\n\nTwo DistributionsStatistical TestCode\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    Welch Two Sample t-test\n\ndata:  norm_x and norm_y\nt = -55.188, df = 17450, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -2.059542 -1.918262\nsample estimates:\nmean of x mean of y \n0.9928849 2.9817871 \n\n\n\n\n\nset.seed(123)                               # set the seed for reproducibility\n\nnorm_x = rnorm(n = 10000, mean = 1, sd = 3) # generate data with different properties\nnorm_y = rnorm(n = 10000, mean = 3, sd = 2) # generate data with different properties\n\nhistogram = ggplot() +\n  geom_histogram(aes(x = norm_x, fill = \"Distribution X\"), alpha = 0.5) +\n  geom_histogram(aes(x = norm_y, fill = \"Distribution Y\"), alpha = 0.5) +\n  geom_vline(xintercept = mean(norm_x), color = \"red\") +\n  geom_vline(xintercept = mean(norm_y), color = \"blue\") +\n  labs(x = NULL,\n       y = NULL,\n       fill = NULL) +\n  theme_bw()\n\nboxplot = ggplot() +\n  geom_boxplot(aes(x = norm_x, y = \"X\", fill = \"Distribution X\"), alpha = 0.5) +\n  geom_boxplot(aes(x = norm_y, y = \"Y\", fill = \"Distribution Y\"), alpha = 0.5) +\n  labs(x = NULL,\n       y = NULL,\n       fill = NULL) +\n  theme_bw()"
   },
   {
     "objectID": "slides/ps312-s_08.html#data-merging",
@@ -404,5 +404,33 @@
     "title": "Quarter Review",
     "section": "Data Merging",
     "text": "Data Merging\n\nResultVisualization\n\n\n\ndf_x %&gt;% \n  left_join(df_y, by = \"ID\") \n\n\n\n\n\n\n\nID\nX\n\n\n\n\n1\n34\n\n\n2\n22\n\n\n3\n19\n\n\n4\n85\n\n\n\n\n\n\n\n\n\n\n\n\n\nID\nY\n\n\n\n\n1\nBlue\n\n\n2\nRed\n\n\n4\nGreen\n\n\n4\nYellow\n\n\n\n\n\n\n\n\n\n\n\n\n\nID\nX\nY\n\n\n\n\n1\n34\nBlue\n\n\n2\n22\nRed\n\n\n3\n19\nNA\n\n\n4\n85\nGreen\n\n\n4\n85\nYellow"
+  },
+  {
+    "objectID": "slides/ps312-s_08.html#model-interpretation",
+    "href": "slides/ps312-s_08.html#model-interpretation",
+    "title": "Quarter Review",
+    "section": "Model Interpretation",
+    "text": "Model Interpretation"
+  },
+  {
+    "objectID": "slides/ps312-s_08.html#model-diagnostics",
+    "href": "slides/ps312-s_08.html#model-diagnostics",
+    "title": "Quarter Review",
+    "section": "Model Diagnostics",
+    "text": "Model Diagnostics"
+  },
+  {
+    "objectID": "slides/ps312-s_08.html#causal-relationship",
+    "href": "slides/ps312-s_08.html#causal-relationship",
+    "title": "Quarter Review",
+    "section": "Causal Relationship",
+    "text": "Causal Relationship\n\n\n\n\n\n\nSource: Heiss, Andrew. Program Evaluation. https://evalsp25.classes.andrewheiss.com/content/06-content.html"
+  },
+  {
+    "objectID": "slides/ps312-s_08.html#causal-relationship-1",
+    "href": "slides/ps312-s_08.html#causal-relationship-1",
+    "title": "Quarter Review",
+    "section": "Causal Relationship",
+    "text": "Causal Relationship\n\n\n\n\n\n\nSource: Heiss, Andrew. Program Evaluation. https://evalsp25.classes.andrewheiss.com/content/06-content.html"
   }
 ]
