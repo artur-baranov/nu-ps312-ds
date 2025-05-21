@@ -1,5 +1,5 @@
 ---
-title: "Quarto and Quarter Review"
+title: "Quarter Review"
 subtitle: "Week 8"
 date: 2025-05-22
 format: 
@@ -30,23 +30,42 @@ toc: true
 <iframe height="500" width="100%" src="slides/ps312-s_08.html"></iframe>
 
 
+
 ```{r}
 library(readxl)
 cpds = read_excel("data/cpds.xlsx")
 ```
 
 ```{r}
-model_mlr = lm(prefisc_gini ~ eu + openc * poco, cpds)
+#| warning: false
+#| message: false
+library(GGally)
+
+ggpairs(cpds, columns = c("prefisc_gini", "eu", "openc", "poco"))
+```
+
+```{r}
+cpds$eu = as.factor(cpds$eu)
+cpds$poco = as.factor(cpds$poco)
+```
+
+
+```{r}
+model_mlr = lm(prefisc_gini ~ as.factor(eu) + openc * as.factor(poco), cpds)
 summary(model_mlr)
 ```
 
 ```{r}
 library(ggeffects)
 
-ggpredict(model_mlr, terms = c("openc", "poco", "eu")) |>
+ggpredict(model_mlr, terms = c("openc", "poco")) |>
   plot()
 ```
 
+```{r}
+library(ggfortify)
+autoplot(model_mlr, colour = "as.factor(poco)")
+```
 
 
 # What's next?
