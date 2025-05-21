@@ -17,7 +17,9 @@ toc: true
 
 # Agenda
 
--   Reviewing we have learned
+-   Reviewing what we have learned
+
+-   Model Interpretation and Diagnostics
 
 -   Quarto formatting
 
@@ -28,10 +30,54 @@ toc: true
 <iframe height="500" width="100%" src="slides/ps312-s_08.html"></iframe>
 
 
+```{r}
+library(readxl)
+cpds = read_excel("data/cpds.xlsx")
+```
+
+```{r}
+model_mlr = lm(prefisc_gini ~ eu + openc * poco, cpds)
+summary(model_mlr)
+```
+
+```{r}
+library(ggeffects)
+
+ggpredict(model_mlr, terms = c("openc", "poco", "eu")) |>
+  plot()
+```
+
+
 
 # What's next?
 
-# Datasets we have used
+## Different Model Specifications
+
+What if your outcome is not continuous?
+
+| Outcome type | Model       | Functions                        |
+|--------------|-------------|----------------------------------|
+| Count data   | Poisson     | `glm()` with poisson link        |
+| Binary       | Binomial    | `glm()` with binomial link       |
+| Categorical  | Multinomial | `multinom()` from `nnet` library |
+
+## Quarto Formatting
+
+
+
+# Libraries and Functions covered
+
+| Library      | Functions                          | Description                                          |
+|--------------|------------------------------------|------------------------------------------------------|
+| tidyverse    | `filter()`, `mutate()`, `ggplot()` | data wrangling and visualization                     |
+| modelsummary | `modelsummary()`                   | present good looking tables                          |
+| ggeffects    | `ggpredict()`                      | calculate and visualize marginal effects             |
+| GGally       | `ggpairs()`, `ggcoef()`            | extension to ggplot                                  |
+| ggfortify    | `autoplot()`                       | extension to ggplot for diagnostics                  |
+| lmtest       | `bptest()`                         | statistical tests for diagnostics                    |
+| car          | `vif()`                            | additional statistical tests for diagnostics         |
+
+# Datasets covered
 
 | Dataset                                           | Description                                | Link                                                     |
 |---------------------------------------------------|--------------------------------------------|----------------------------------------------------------|

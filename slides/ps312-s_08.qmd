@@ -424,25 +424,11 @@ df_y %>%
 
 :::
 
-## Model Interpretation
 
+## Turning to the Sript
 
+Let's discuss
 
-## Model Diagnostics
+-   Model Interpretation
 
-## Libraries and Functions (I)
-
-| Library      | Functions                          | Description                                          |
-|--------------|------------------------------------|------------------------------------------------------|
-| tidyverse    | `filter()`, `mutate()`, `ggplot()` | data wrangling and visualization                     |
-| modelsummary | `modelsummary()`                   | present good looking tables                          |
-| ggeffects    | `ggpredict()`                      | calculate and visualize marginal effects             |
-
-## Libraries and Functions (II)
-
-| Library      | Functions                          | Description                                          |
-|--------------|------------------------------------|------------------------------------------------------|
-| GGally       | `ggpairs()`, `ggcoef()`            | extension to ggplot                                  |
-| ggfortify    | `autoplot()`                       | extension to ggplot for diagnostics                  |
-| lmtest       | `bptest()`                         | statistical tests for diagnostics                    |
-| car          | `vif()`                            | additional statistical tests for diagnostics         |
+-   Model Diagnostics
