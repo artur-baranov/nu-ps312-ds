@@ -18,7 +18,7 @@
     "href": "index.html#schedule",
     "title": "PS312 Statistical Research Methods",
     "section": "Schedule",
-    "text": "Schedule\n\n\n\n\n\nWeek\n\n\nTitle\n\n\nLink\n\n\nCode\n\n\nData\n\n\n\n\n\n\n1\n\n\nIntroduction to Statistical Methods\n\n\n\n\n\n\n\n\n\n\n\n\n\n2\n\n\nExploring Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n3\n\n\nData Structures and Classes\n\n\n\n\n\n\n\n\n \n\n\n\n\n4\n\n\nStatistical Tests\n\n\n\n\n\n\n\n\n\n\n\n\n\n5\n\n\nOLS Regression\n\n\n\n\n\n\n\n\n\n\n\n\n\n6\n\n\nRegression Extensions\n\n\n\n\n\n\n\n\n\n\n\n\n\n7\n\n\nPresenting Results of Regression\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Schedule\n\n\n\n\n\nWeek\n\n\nTitle\n\n\nLink\n\n\nCode\n\n\nData\n\n\n\n\n\n\n1\n\n\nIntroduction to Statistical Methods\n\n\n\n\n\n\n\n\n\n\n\n\n\n2\n\n\nExploring Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n3\n\n\nData Structures and Classes\n\n\n\n\n\n\n\n\n \n\n\n\n\n4\n\n\nStatistical Tests\n\n\n\n\n\n\n\n\n\n\n\n\n\n5\n\n\nOLS Regression\n\n\n\n\n\n\n\n\n\n\n\n\n\n6\n\n\nRegression Extensions\n\n\n\n\n\n\n\n\n\n\n\n\n\n7\n\n\nPresenting Results of Regression\n\n\n\n\n\n\n\n\n\n\n\n\n\n8\n\n\nQuarter Review\n\n\n\n\n\n\n\n\n \n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -303,16 +303,16 @@
   {
     "objectID": "ps312-d_08.html",
     "href": "ps312-d_08.html",
-    "title": "Quarto and Quarter Review",
+    "title": "Quarter Review",
     "section": "",
-    "text": "Before we start\n\nQuestions regarding Final Paper or the class?\nNext week no section, but office hours instead (Scott Hall 110)\n\n\n\nAgenda\n\nReviewing we have learned\nQuarto formatting\n\n\n\nQuarter Review\n View slides in new window\n\n\n\n\nWhat’s next?\n\n\nDatasets we have used\n\n\n\nDataset\nDescription\nLink\n\n\n\n\nV-Dem\nMeasures democracy worldwide\nV-Dem\n\n\nWorld Happiness Report\nAnnual happiness report\nWorld Happiness Report\n\n\nWho Governs\nDataset on political elites\nWho Governs\n\n\nSIPRI\nData on military operations\nSIPRI\n\n\nComparative Political Data Set\nA dataset covering political institutions\nCPDS\n\n\n\n\n\n\n\n\n\n\nPractice\n\n\nCheck List\n\nI know that every lab has check list below! And I will use it to navigate what we have learned\nR doesn’t scare me anymore\nI have developed the intuition behind application of quantitative methods"
+    "text": "Questions regarding Final Paper or the class?\nNext week no section, but office hours instead (Scott Hall 110)"
   },
   {
     "objectID": "slides/ps312-s_08.html#review-of-the-quarter",
     "href": "slides/ps312-s_08.html#review-of-the-quarter",
     "title": "Quarter Review",
     "section": "Review of the Quarter",
-    "text": "Review of the Quarter\n\n\nSubstantive\n\n\nCausality\nMechanisms\nConfounders\n\n\n\nTechnical\n\n\nStatistical Tests\nRegressions\nDiagnostics"
+    "text": "Review of the Quarter\n\n\nSubstantive\n\n\nAsking Statistical Questions\nCausality\nConfounders\n\n\n\nTechnical\n\n\nData Merging\nStatistical Tests\nRegressions\nDiagnostics"
   },
   {
     "objectID": "slides/ps312-s_08.html#distributions",
@@ -438,6 +438,97 @@
     "href": "slides/ps312-s_08.html#turning-to-the-sript",
     "title": "Quarter Review",
     "section": "Turning to the Sript",
-    "text": "Turning to the Sript\nLet’s discuss\n\nModel Interpretation\nModel Diagnostics"
+    "text": "Turning to the Sript\nLet’s discuss\n\nSubstantive\n\nAsking Statistical Questions\nCausality\nConfounders\n\n\nTechnical\n\nData Merging\nStatistical Tests\nRegressions\nDiagnostics"
+  },
+  {
+    "objectID": "ps312-d_08.html#different-model-specifications",
+    "href": "ps312-d_08.html#different-model-specifications",
+    "title": "Quarter Review",
+    "section": "Different Model Specifications",
+    "text": "Different Model Specifications\nWhat if your outcome is not continuous?\n\n\n\nOutcome type\nModel\nFunctions\n\n\n\n\nCount data\nPoisson\nglm() with poisson link\n\n\nBinary\nBinomial\nglm() with binomial link\n\n\nCategorical\nMultinomial\nmultinom() from nnet library"
+  },
+  {
+    "objectID": "ps312-d_08.html#quarto-formatting",
+    "href": "ps312-d_08.html#quarto-formatting",
+    "title": "Quarter Review",
+    "section": "Quarto formatting",
+    "text": "Quarto formatting\nIf you are interested, learning how to write papers in R and Quarto is quite easy. You can render your documents to PDF. Here are a couple of guides:\n\nTypst\nMarkdown"
+  },
+  {
+    "objectID": "slides/ps312-s_08.html#review-of-the-quarter-1",
+    "href": "slides/ps312-s_08.html#review-of-the-quarter-1",
+    "title": "Quarter Review",
+    "section": "Review of the Quarter",
+    "text": "Review of the Quarter\n\nSubstantive\n\nAsking Statistical Questions\nCausality\nConfounders\n\n\nTechnical\n\nData Merging\nStatistical Tests\nRegressions\nDiagnostics"
+  },
+  {
+    "objectID": "slides/ps312-s_08.html#good-statistical-question",
+    "href": "slides/ps312-s_08.html#good-statistical-question",
+    "title": "Quarter Review",
+    "section": "Good Statistical Question",
+    "text": "Good Statistical Question\n\nSpecific\nIsn’t purely normative\nCan be made measurable\nMore than just a few relevant cases exist"
+  },
+  {
+    "objectID": "ps312-d_08.html#exploratory-analysis",
+    "href": "ps312-d_08.html#exploratory-analysis",
+    "title": "Quarter Review",
+    "section": "Exploratory Analysis",
+    "text": "Exploratory Analysis\nLet’s do a similar data analysis as before. What do you notice?\n\nlibrary(GGally)\n\nggpairs(cpds, columns = c(\"prefisc_gini\", \"eu\", \"openc\", \"poco\"))\n\n\n\n\n\n\n\n\nLet’s change misclassified variables.\n\ncpds$eu = as.factor(cpds$eu)\ncpds$poco = as.factor(cpds$poco)"
+  },
+  {
+    "objectID": "ps312-d_08.html#linearity-assumption",
+    "href": "ps312-d_08.html#linearity-assumption",
+    "title": "Quarter Review",
+    "section": "Linearity Assumption",
+    "text": "Linearity Assumption\nWe expect that the relationship between our dependent variable and set of independent variables would be linear.\n\nautoplot(model_int)[1]\n\n\n\n\n\n\n\n\nMore formally, we can use reset() test from lmtest library. What does the p-value below indicates?\n\nreset(model_int)\n\n\n    RESET test\n\ndata:  model_int\nRESET = 2.4443, df1 = 2, df2 = 542, p-value = 0.08774\n\n\nFor fixing, consider variable transformations. You can use Box-Cox transformations, more on them here. Alternatively, use another model (some suggestions are at the end of the script)."
+  },
+  {
+    "objectID": "ps312-d_08.html#normality",
+    "href": "ps312-d_08.html#normality",
+    "title": "Quarter Review",
+    "section": "Normality",
+    "text": "Normality\nWe want residuals to be distributed normally.\n\nautoplot(model_int)[2]\n\n\n\n\n\n\n\n\nFormally, you can use any normality test. E.g., shapiro.test(). What does it say?\n\nshapiro.test(model_int$residuals)\n\n\n    Shapiro-Wilk normality test\n\ndata:  model_int$residuals\nW = 0.99679, p-value = 0.3493\n\n\nFor fixing, consider transforming the variables, and think through potential omitted variables. Alternatively, use another model."
+  },
+  {
+    "objectID": "ps312-d_08.html#non-constant-variance",
+    "href": "ps312-d_08.html#non-constant-variance",
+    "title": "Quarter Review",
+    "section": "Non Constant Variance",
+    "text": "Non Constant Variance\nThe variance of the residuals should be constant (i.e. be homoscedastic).\n\nautoplot(model_int)[3]\n\n\n\n\n\n\n\n\nFor formal test, you can use bptest() from lmtest library. What does p-value say?\n\nbptest(model_int)\n\n\n    studentized Breusch-Pagan test\n\ndata:  model_int\nBP = 18.038, df = 4, p-value = 0.001213\n\n\nFor fixing, consider introducing robust standard errors. You can use lm_robust() function from the estimatr package."
+  },
+  {
+    "objectID": "ps312-d_08.html#influential-cases",
+    "href": "ps312-d_08.html#influential-cases",
+    "title": "Quarter Review",
+    "section": "Influential cases",
+    "text": "Influential cases\nWe don’t want one or several observations to be driving the whole result. Thus, we need to be cautios with influential cases.\n\nautoplot(model_int)[4]\n\n\n\n\n\n\n\n\nFor the formal evaluation, you can use Cook’s Distance. If you have observation that are above the threshold (usually, \\(\\frac{4}{N}\\)), consider excluding them and study separately. For example, in our case it is\n\n4 / model_int$df.residual\n\n[1] 0.007352941\n\n\nThen, we can check it easily on the plot.\n\nplot(model_int, 4)"
+  },
+  {
+    "objectID": "ps312-d_08.html#multicollinearity",
+    "href": "ps312-d_08.html#multicollinearity",
+    "title": "Quarter Review",
+    "section": "Multicollinearity",
+    "text": "Multicollinearity\nFinally, let’s address multicollinearity. We want to avoid perfect or near-perfect linear relationships among the independent variables. The Variance Inflation Factor (VIF) helps detect this issue. If multicollinearity is present, consider removing one of the variables with a high VIF. However, it’s not uncommon for interaction terms and polynomial transformations to have high VIF scores (and that’s ok).\n\nlibrary(car)\nvif(model_int)\n\n        eu      openc       poco openc:poco \n  1.166160   1.212807   7.819099   8.008637"
+  },
+  {
+    "objectID": "ps312-d_08.html#alternative-models",
+    "href": "ps312-d_08.html#alternative-models",
+    "title": "Quarter Review",
+    "section": "Alternative Models",
+    "text": "Alternative Models\nWhat if your outcome is not continuous or my diagnostics fails completely? Then here are the starting points that would help you to think of other than linear relations\n\n\n\nOutcome type\nModel\nFunctions\n\n\n\n\nCount data\nPoisson\nglm() with poisson link\n\n\nBinary\nBinomial\nglm() with binomial link\n\n\nCategorical\nMultinomial\nmultinom() from nnet library"
+  },
+  {
+    "objectID": "ps312-d_08.html#libraries-and-functions-covered",
+    "href": "ps312-d_08.html#libraries-and-functions-covered",
+    "title": "Quarter Review",
+    "section": "Libraries and Functions covered",
+    "text": "Libraries and Functions covered\n\n\n\n\n\n\n\n\nLibrary\nFunctions\nDescription\n\n\n\n\ntidyverse\nfilter(), mutate(), ggplot()\ndata wrangling and visualization\n\n\nmodelsummary\nmodelsummary()\npresent good looking tables\n\n\nggeffects\nggpredict()\ncalculate and visualize marginal effects\n\n\nGGally\nggpairs(), ggcoef()\nextension to ggplot\n\n\nggfortify\nautoplot()\nextension to ggplot for diagnostics\n\n\nlmtest\nbptest()\nstatistical tests for diagnostics\n\n\ncar\nvif()\nadditional statistical tests for diagnostics"
+  },
+  {
+    "objectID": "ps312-d_08.html#datasets-covered",
+    "href": "ps312-d_08.html#datasets-covered",
+    "title": "Quarter Review",
+    "section": "Datasets covered",
+    "text": "Datasets covered\n\n\n\nDataset\nDescription\nLink\n\n\n\n\nV-Dem\nMeasures democracy worldwide\nV-Dem\n\n\nWorld Happiness Report\nAnnual happiness report\nWorld Happiness Report\n\n\nWho Governs\nDataset on political elites\nWho Governs\n\n\nSIPRI\nData on military operations\nSIPRI\n\n\nComparative Political Data Set\nA dataset covering political institutions\nCPDS"
   }
 ]

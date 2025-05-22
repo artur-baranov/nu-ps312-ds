@@ -52,3 +52,10 @@
   Code: "[{{< fa file-code >}}](scripts/ps312-d_07.qmd){target='_blank'}"
   Data: "[{{< fa database >}}](data/sipri_vdem.RDS){target='_blank'}"
   type: "schedule"
+  
+- title: "Quarter Review"
+  Week: 8
+  date: 2025-05-22
+  Link: "[{{< fa link >}}](/ps312-d_08.qmd)"
+  Code: "[{{< fa file-code >}}](scripts/ps312-d_08.qmd){target='_blank'}"
+  type: "schedule"

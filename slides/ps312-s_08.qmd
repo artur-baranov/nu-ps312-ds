@@ -21,11 +21,9 @@ format:
 **Substantive** 
 
 ::: {.incremental}
--   Causality
-
--   Mechanisms
-
--   Confounders
+*   Asking Statistical Questions
+  +   Causality
+  +   Confounders
 
 :::
 
@@ -35,6 +33,8 @@ format:
 **Technical**
 
 ::: {.incremental}
+
+-   Data Merging
 
 -   Statistical Tests
 
@@ -46,6 +46,39 @@ format:
 :::
 
 ::::
+
+## Review of the Quarter
+
+::: {.column width="50%"}
+**Substantive** 
+
+*   **Asking Statistical Questions**
+  +   **Causality**
+  +   **Confounders**
+
+:::
+
+::: {.column width="50%"}
+**Technical**
+
+-   **Data Merging**
+
+-   **Statistical Tests**
+
+-   Regressions
+
+-   Diagnostics
+:::
+
+## Good Statistical Question
+
+-   Specific
+
+-   Isn't purely normative
+
+-   Can be made measurable 
+
+-   More than just a few relevant cases exist
 
 ## Causal Relationship
 
@@ -429,6 +462,23 @@ df_y %>%
 
 Let's discuss
 
--   Model Interpretation
+::: {.column width="50%"}
+**Substantive** 
 
--   Model Diagnostics
+*   Asking Statistical Questions
+  +   Causality
+  +   Confounders
+
+:::
+
+::: {.column width="50%"}
+**Technical**
+
+-   Data Merging
+
+-   Statistical Tests
+
+-   **Regressions**
+
+-   **Diagnostics**
+:::
